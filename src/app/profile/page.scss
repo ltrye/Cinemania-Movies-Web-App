@@ -1,0 +1,52 @@
+.profile-panel {
+  position: relative;
+  border-radius: 12px;
+  margin: 2rem auto;
+  width: 90%;
+  height: 35rem;
+  background-color: rgba(0, 0, 0, 0.438);
+}
+
+.profile-picture {
+  overflow: hidden;
+  position: absolute;
+  background-color: black;
+  border-radius: 50%;
+
+  margin: 2rem;
+  width: 15rem;
+  height: 15rem;
+}
+
+.profile-info {
+  font-size: 3rem;
+  color: white;
+  position: absolute;
+
+  height: 3rem;
+  bottom: 35%;
+  left: 5%;
+  //   background-color: var(--green-pallete);
+}
+
+.profile-logout {
+  position: absolute;
+  background-color: var(--green-pallete);
+  cursor: pointer;
+  padding: 0.8rem 1.6rem;
+  bottom: 5%;
+  left: 7%;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.profile-redirect {
+  bottom: 45%;
+  left: 40%;
+}
+
+.profile-premium {
+  bottom: 20%;
+}

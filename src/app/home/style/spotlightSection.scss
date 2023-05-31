@@ -1,0 +1,298 @@
+.spotlight-wrapper {
+  position: relative;
+  height: 38.4vw;
+  margin: 30px 3rem;
+  grid-template: 62% 12% auto/5% 75% 18%;
+  display: grid;
+  column-gap: 14px;
+  row-gap: 10px;
+  user-select: none;
+  box-shadow: rgba(50, 50, 93, 0.371) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.488) 0px 8px 16px -8px;
+}
+
+//------INFORMATION --------///
+.main-preview {
+  position: relative;
+  grid-row: 1 / span 3;
+  grid-column: 2;
+  & .preview-info {
+    position: absolute;
+    width: 43%;
+    height: 100%;
+    padding-left: 8%;
+
+    &::after {
+      position: absolute;
+      content: "";
+      width: 130%;
+      top: 0%;
+      left: 0%;
+      bottom: 0%;
+      z-index: 1;
+      opacity: 0.6;
+      background: linear-gradient(
+        90deg,
+        #181818 10%,
+        hsla(0, 0%, 9%, 0.98) 20%,
+        hsla(0, 0%, 9%, 0.97) 25%,
+        hsla(0, 0%, 9%, 0.95) 35%,
+        hsla(0, 0%, 9%, 0.94) 40%,
+        hsla(0, 0%, 9%, 0.92) 45%,
+        hsla(0, 0%, 9%, 0.9) 50%,
+        hsla(0, 0%, 9%, 0.87) 55%,
+        hsla(0, 0%, 9%, 0.82) 60%,
+        hsla(0, 0%, 9%, 0.75) 65%,
+        hsla(0, 0%, 9%, 0.63) 70%,
+        hsla(0, 0%, 9%, 0.45) 75%,
+        hsla(0, 0%, 9%, 0.27) 80%,
+        hsla(0, 0%, 9%, 0.15) 85%,
+        hsla(0, 0%, 9%, 0.08) 90%,
+        hsla(0, 0%, 9%, 0.03) 95%,
+        hsla(0, 0%, 9%, 0)
+      );
+    }
+  }
+}
+.description-wrapper {
+  background-color: aquamarine;
+  position: relative;
+}
+
+.main-title {
+  display: block;
+  font-size: xxx-large;
+  z-index: 9999;
+  color: white;
+  margin-top: 24%;
+
+  position: relative;
+}
+.preview-date {
+  position: relative;
+  display: block;
+  z-index: 999;
+  color: white;
+
+  margin-top: 13vw;
+}
+
+.preview-holder {
+  overflow: hidden;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+//----FILM PREVIEW SLIDER----------
+.image-slider {
+  position: absolute;
+  overflow: hidden;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  height: 500%;
+  width: 100%;
+  background-color: rgb(0, 0, 0);
+  transition: all 1000ms;
+}
+
+.film-preview {
+  position: relative;
+  width: 100%;
+  height: 20%;
+}
+//------------------------------
+
+//---------FILM PREVIEW OVERLAY----------
+.preview-tag-wrapper {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  margin-top: 1rem;
+  z-index: 99;
+  & .preview-tag {
+    font-family: "Roboto", sans-serif;
+    font-size: 0.8rem;
+    border: 1.2px solid white;
+    display: block;
+    border-radius: 100px;
+    padding: 5px 14px;
+    background-color: black;
+    color: white;
+    position: relative;
+    white-space: nowrap;
+  }
+}
+
+.preview-button {
+  position: relative;
+  z-index: 999;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  column-gap: 7px;
+  & .play-button {
+    z-index: 0;
+    overflow: hidden;
+    user-select: none;
+    font-family: "Roboto", sans-serif;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    background-color: var(--green-pallete);
+    width: 7.5rem;
+    height: 2.6rem;
+    border-radius: 6px 2px 2px 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 100ms;
+    &:active {
+      transform: scale(0.9);
+    }
+    & .button-link {
+      position: absolute;
+
+      height: 100%;
+      width: 100%;
+    }
+  }
+  & .bookmark-holder {
+    display: flex;
+    cursor: pointer;
+    height: 2.6rem;
+    width: 3.4rem;
+    border-radius: 2px 6px 6px 2px;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 100ms;
+    &:active {
+      transform: scale(0.9);
+    }
+    & .bookmark-button {
+      height: 1.3rem;
+      width: 1.3rem;
+    }
+  }
+}
+//-----------------------------------------------//
+
+//--------------POSTER HOLDER--------------------//
+.main-poster {
+  position: relative;
+  height: 100%;
+  // background-color: aqua;
+  border-radius: 12px;
+  grid-row: 1;
+  grid-column: 3;
+}
+.poster-holder {
+  // background-color: rgb(174, 195, 229);
+
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px 8px 0 0;
+}
+
+.poster-slider {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: calc(100% * 5);
+}
+
+.poster-element {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+//----------------------------//
+
+//--Home-promotion--//
+.home-promotion {
+  position: relative;
+  grid-row: 3;
+  grid-column: 3;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(1, 1, 1, 0.578);
+  border-radius: 10px;
+}
+//--Home user--///
+.home-user {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.849);
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+}
+.home-user-ava {
+  border: 2px white solid;
+  margin-top: 1rem;
+  width: 80%;
+
+  height: 15%;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+}
+//-------------//
+.loading-state {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  animation: fade 1000ms forwards;
+}
+
+@keyframes fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .spotlight-wrapper {
+    position: relative;
+    margin: 10px;
+    height: 100vw;
+    padding: 0;
+    grid-template: 55% 15% auto / 27% 60% auto;
+    display: grid;
+    column-gap: 7px;
+  }
+  .main-preview {
+    grid-row: 1;
+    grid-column: 1 / span 3;
+  }
+  .main-poster {
+    width: 100%;
+    grid-row: 2 / span 2;
+    grid-column: 1;
+
+    height: 100%;
+  }
+
+  .home-user {
+    grid-row: 2 / span 2;
+    grid-column: 3;
+  }
+  .home-promotion {
+    grid-row: 3;
+    grid-column: 2;
+  }
+}

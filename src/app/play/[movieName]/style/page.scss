@@ -1,0 +1,48 @@
+.video-config {
+  position: relative;
+  height: 50%;
+  width: 60%;
+  object-fit: fill;
+  margin: 8vh auto;
+  display: block;
+  overflow: hidden;
+  border-radius: 10px;
+  filter: drop-shadow(0px 8px 5px #00000040);
+}
+@media screen and (max-width: 700px) {
+  .video-config {
+    width: 80%;
+    margin: 30vh auto;
+  }
+}
+/* Change all text and icon colors in the player. */
+// .vjs-matrix.video-js {
+// }
+
+/* Change the border of the big play button. */
+// .vjs-matrix .vjs-big-play-button {
+// }
+
+/* Change the color of various "bars". */
+// .vjs-matrix .vjs-volume-level,
+// .vjs-matrix .vjs-play-progress,
+// .vjs-matrix .vjs-slider-bar {
+// }
+
+/* Target the Text Track Display container */
+.video-js .vjs-text-track-display > div > div > div {
+  font-size: 2.3vh;
+  line-height: 20px;
+
+  background: transparent !important;
+  padding: 2px;
+  text-shadow: 1px 2px 3px #000000;
+}
+
+.play-title {
+  font-family: "Roboto";
+  color: white;
+  position: relative;
+  margin-left: 43vh;
+  margin-top: -3rem;
+}
