@@ -68,6 +68,8 @@ async function Signing(e, setLoad, setStatus, setOption) {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
+
         method: "POST",
         body: JSON.stringify(account),
       }

@@ -79,7 +79,7 @@ async function Logging(e, setLoad, setStatus) {
       setStatus({ status: "success", message: "Log in successfully!😎" });
       document.cookie = `jwt=${loginStatus.token}`;
       console.log(loginStatus);
-      // window.location.href = "/profile";
+      window.location.href = "/profile";
     } else {
       setStatus({ status: "fail", message: loginStatus.message });
     }
