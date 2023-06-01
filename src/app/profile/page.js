@@ -6,18 +6,23 @@ import "./page.scss";
 import { useEffect, useState } from "react";
 
 export default async function Page() {
-  const [isLogged, setIsLogged] = useState(false);
+  const [isLogged, setIsLogged] = useState(null);
   useEffect(() => {
     async function check() {
       console.log(document.cookie);
       const currentUser = await checkLoggin();
       console.log(currentUser.status);
-      if (currentUser.status === "fail") setIsLogged(false);
-      else setIsLogged(true);
+      if (currentUser.status === "fail") setIsLogged("fail");
+      else setIsLogged("success");
     }
     check();
   });
-  return <>{isLogged ? <ProfilePage /> : <Blank />}</>;
+  return (
+    <>
+      {isLogged === "success" && <ProfilePage />}
+      {isLogged === "fail" && <Blank />}
+    </>
+  );
 }
 
 async function checkLoggin() {
@@ -47,10 +52,17 @@ function ProfilePage() {
           </div>
         </Link>
         <div
-          onClick={() => {
-            Cookies.remove("jwt");
-            console.log(document.cookie);
-
+          onClick={async () => {
+            // Cookies.remove("jwt");
+            // console.log(document.cookie);
+            const res = await fetch(
+              "https://movieflix-production.up.railway.app/api/v1/user/logout",
+              {
+                method: "GET",
+                credentials: "include",
+                mode: "cors",
+              }
+            );
             window.location.href = "user/login";
           }}
           className="profile-logout"
