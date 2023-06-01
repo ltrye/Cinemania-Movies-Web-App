@@ -16,13 +16,6 @@ function checkRoute(path) {
   }
 }
 export default function Layout({ children }) {
-  const [isMount, setIsMount] = useState(false);
-  useEffect(() => {
-    // if (Cookies.get("jwt")) return (window.location.href = "/profile");
-    setIsMount(true);
-  });
-  if (!isMount) return null;
-
   const path = usePathname();
   const option = checkRoute(path);
   console.log(path);

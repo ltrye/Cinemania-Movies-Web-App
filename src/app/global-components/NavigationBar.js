@@ -39,7 +39,7 @@ function SearchBox({}) {
     style: null,
     mount: false,
   });
-  console.log(searchOption);
+
   useEffect(() => {
     function handleClick(e) {
       if (searchBox.current && !searchBox.current.contains(e.target))
