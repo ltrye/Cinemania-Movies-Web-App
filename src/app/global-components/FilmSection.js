@@ -73,28 +73,3 @@ export default function FilmSection() {
     </section>
   );
 }
-
-// async function getData() {
-//   const res = await fetch(
-//     "https://api.api-ninjas.com/v1/randomimage?category=nature",
-//     {
-//       method: "GET",
-//       headers: {
-//         "X-Api-Key": "8q5pVvFcOsKwTtXNJ7SBNg==jhXJ2PoLoUgAvL7C",
-//         "Content-Type": "image/jpg",
-//       },
-//     }
-//   );
-//   // The return value is *not* serialized
-//   // You can return Date, Map, Set, etc.
-
-//   // Recommendation: handle errors
-//   if (!res.ok) {
-//     // This will activate the closest `error.js` Error Boundary
-//     throw new Error("Failed to fetch data");
-//   }
-
-//   const blob = await res.blob();
-//   console.log(URL.createObjectURL(blob));
-//   return URL.createObjectURL(blob);
-// }

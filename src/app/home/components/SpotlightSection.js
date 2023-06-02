@@ -6,7 +6,7 @@ import { useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { BsBookmark } from "react-icons/bs";
 import JsCheck from "@/app/global-components/JsCheck";
-import checkLoggin from "@/app/global-utils/checkLoggin";
+import checkLoggin from "@/app/global-utils/checkLogin";
 
 export default function SpotlightSection() {
   const [select, setSelect] = useState(0);

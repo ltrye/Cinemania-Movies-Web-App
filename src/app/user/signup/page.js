@@ -26,7 +26,11 @@ export default function Signup({ setOption }) {
           ></input>
         </section>
 
-        <button className="login-submit" type="submit">
+        <button
+          disabled={isLoad && true}
+          className="login-submit"
+          type="submit"
+        >
           Sign up
         </button>
 
@@ -69,7 +73,7 @@ async function Signing(e, setLoad, setStatus, setOption) {
           "Content-Type": "application/json",
         },
         credentials: "include",
-
+        cache: "no-cache",
         method: "POST",
         body: JSON.stringify(account),
       }

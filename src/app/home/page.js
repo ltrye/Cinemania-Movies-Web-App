@@ -5,7 +5,7 @@ import Image from "next/image";
 import FilmSection from "../global-components/FilmSection";
 import SpotlightSection from "./components/SpotlightSection";
 import Premium from "./components/Premium";
-import checkLoggin from "../global-utils/checkLoggin";
+import checkLoggin from "../global-utils/checkLogin";
 
 export default async function Page() {
   // const userData = await checkLoggin();

@@ -6,7 +6,13 @@ export default function Premium() {
     <>
       <section className="product-container">
         <section className="product-description">
-          <Image priority src="/bggrad.jpg" fill className="product-bg" />
+          <Image
+            alt="product-preview"
+            priority
+            src="/bggrad.jpg"
+            fill
+            className="product-bg"
+          />
           GOI PREMIUM CINEMANIA 1 THANG
           <div className="product-info">
             Chi tiet: <br />

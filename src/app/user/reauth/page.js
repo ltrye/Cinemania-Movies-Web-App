@@ -8,13 +8,17 @@ export default function PassChange() {
 
   return (
     <>
-      <form onSubmit={(e) => Logging(e, setLoad, setStatus)}>
+      <form onSubmit={(e) => ReAuth(e, setLoad, setStatus)}>
         <span className="title login-title">PASSWORD RECOVERY</span>
         <section className="login-input-group">
           <input placeholder="Email" className="login-input username"></input>
         </section>
 
-        <button className="login-submit" type="submit">
+        <button
+          disabled={isLoad && true}
+          className="login-submit"
+          type="submit"
+        >
           Send verification
         </button>
 
@@ -36,7 +40,7 @@ export default function PassChange() {
   );
 }
 
-async function Logging(e, setLoad, setStatus) {
+async function ReAuth(e, setLoad, setStatus) {
   e.preventDefault();
   setStatus({ status: null, message: null });
   //---USER INPUT----//
@@ -55,6 +59,7 @@ async function Logging(e, setLoad, setStatus) {
           "Content-Type": "application/json",
         },
         method: "POST",
+        cache: "no-cache",
         body: JSON.stringify(account),
       }
     );
@@ -64,6 +69,7 @@ async function Logging(e, setLoad, setStatus) {
     //--IF LOGIN SUCCESSFULLY--//
     if (loginStatus.status === "success") {
       setStatus({ status: "success", message: "Verification mail sent!" });
+      //--IF LOGIN FAIL--------//
     } else {
       setStatus({ status: "fail", message: loginStatus.message });
     }

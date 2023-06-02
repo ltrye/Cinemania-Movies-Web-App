@@ -1,4 +1,5 @@
 "use client";
+import Cookies from "js-cookie";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -20,7 +21,11 @@ export default function Login() {
           ></input>
         </section>
 
-        <button className="login-submit" type="submit">
+        <button
+          disabled={isLoad && true}
+          className="login-submit"
+          type="submit"
+        >
           LOG IN
         </button>
 
@@ -65,10 +70,11 @@ async function Logging(e, setLoad, setStatus) {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include",
+        credentials:
+          process.env.NODE_ENV === "development" ? "omit" : "include",
         method: "POST",
-
         body: JSON.stringify(account),
+        cache: "no-cache",
       }
     );
     const loginStatus = await req.json();
@@ -77,9 +83,12 @@ async function Logging(e, setLoad, setStatus) {
     //--IF LOGIN SUCCESSFULLY--//
     if (loginStatus.status === "success") {
       setStatus({ status: "success", message: "Log in successfully!😎" });
-      // document.cookie = `jwt=${loginStatus.token}`;
-      console.log(loginStatus);
+      if (process.env.NODE_ENV === "development")
+        document.cookie = `jwt=${loginStatus.token}; path=/`;
+
       window.location.href = "/profile";
+
+      //--IF LOGIN FAILED--//
     } else {
       setStatus({ status: "fail", message: loginStatus.message });
     }
