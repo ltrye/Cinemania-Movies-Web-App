@@ -51,7 +51,7 @@ export default function SpotlightSection() {
                   href={`/title/${hightlightMovie[select].title}`}
                 >
                   <div className="play-button">
-                    <FaPlay width={30} height={30} />
+                    <FaPlay className="home-play-icon" />
                     Watch
                   </div>
                 </Link>
