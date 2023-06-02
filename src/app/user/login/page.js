@@ -74,7 +74,6 @@ async function Logging(e, setLoad, setStatus) {
           process.env.NODE_ENV === "development" ? "omit" : "include",
         method: "POST",
         body: JSON.stringify(account),
-        cache: "no-cache",
       }
     );
     const loginStatus = await req.json();

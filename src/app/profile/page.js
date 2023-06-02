@@ -11,7 +11,8 @@ export default async function Page() {
   useEffect(() => {
     //--FETCH USER DATA IF JWT VALID--//
     async function check() {
-      if (!Cookies.get("jwt")) return setIsLogged({ status: "fail" });
+      if (process.env.NODE_ENV === "development" && !Cookies.get("jwt"))
+        return setIsLogged({ status: "fail" });
       const currentUser = await checkLogin();
       console.log(currentUser);
       if (currentUser.status === "fail") setIsLogged({ status: "fail" });
