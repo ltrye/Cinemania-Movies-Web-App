@@ -1,6 +1,8 @@
 "use client";
-import Stripe from "stripe";
+// import Stripe from "stripe";
 import Cookies from "js-cookie";
+import { Stripe } from "@stripe/stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 // let productId = await fetch(
 //   "https://movieflix-production.up.railway.app/api/v1/product"
 // );
@@ -10,7 +12,7 @@ import Cookies from "js-cookie";
 const pay = async (productId) => {
   console.log(process.env.NODE_ENV);
   //---Get productId-----//
-  const stripe = Stripe(
+  const stripe = await loadStripe(
     "pk_test_51NCAQOFQZuy2dcaHp0V18YhchNNqFoPMblQnZpTw0XcvNcFcVKiqH1ADAOE5RABjz0OuocvkANwdujt3Ht0DpMrI00YdVH8ERC"
   );
   // console.log(stripe);
