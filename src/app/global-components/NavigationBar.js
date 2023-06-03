@@ -53,7 +53,7 @@ function SearchBox({}) {
       setSearchOption({ style: null, mount: false });
   }
   return (
-    <div ref={searchBox} tabIndex={0} className="search-wrapper">
+    <>
       <AiOutlineSearch
         onClick={() => {
           if (searchOption.mount)
@@ -62,18 +62,19 @@ function SearchBox({}) {
         }}
         className="search-icon"
       />
-
-      {searchOption.mount && (
-        <section
-          onAnimationEnd={transitionEndHandler}
-          className={`search-box ${
-            searchOption.style === "fade out" && "search-close "
-          }`}
-        >
-          <input placeholder="DITMEHOGMINH" className="nav-input"></input>
-        </section>
-      )}
-    </div>
+      <div ref={searchBox} tabIndex={0} className="search-wrapper">
+        {searchOption.mount && (
+          <section
+            onAnimationEnd={transitionEndHandler}
+            className={`search-box ${
+              searchOption.style === "fade out" && "search-close "
+            }`}
+          >
+            <input placeholder="DITMEHOGMINH" className="nav-input"></input>
+          </section>
+        )}
+      </div>
+    </>
   );
 }
 
@@ -85,9 +86,8 @@ export default function NavigationBar() {
   return (
     <>
       <section className="panel">
-        <div className="nav-menu">
-          <AltNavigationBar check={check} />
-        </div>
+        <AltNavigationBar check={check} />
+
         <div className="logo">
           <span>TRYE</span>
         </div>

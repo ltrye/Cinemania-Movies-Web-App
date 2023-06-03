@@ -36,68 +36,65 @@ export default function SpotlightSection() {
         {/**--------------------------- */}
         {/*Left Panel */}
         <div className="main-preview">
-          <div className="title-left"></div>
-          <div className="preview-holder">
-            {/*---------IMAGE SLIDER--------- */}
-            <div className="preview-info">
-              <PreviewDescription
-                title={hightlightMovie[select].title}
-                date={hightlightMovie[select].date}
-                genre={hightlightMovie[select].genre}
-              />
-              <div className="preview-button">
-                <Link
-                  className="button-link"
-                  href={`/title/${hightlightMovie[select].title}`}
-                >
-                  <div className="play-button">
-                    <FaPlay className="home-play-icon" />
-                    Watch
-                  </div>
-                </Link>
-
-                <div className="bookmark-holder">
-                  <BsBookmark className="bookmark-button" />
+          {/*---------IMAGE SLIDER--------- */}
+          <div className="preview-info">
+            <PreviewDescription
+              title={hightlightMovie[select].title}
+              date={hightlightMovie[select].date}
+              genre={hightlightMovie[select].genre}
+            />
+            <div className="preview-button">
+              <Link
+                className="button-link"
+                href={`/title/${hightlightMovie[select].title}`}
+              >
+                <div className="play-button">
+                  <FaPlay className="home-play-icon" />
+                  Watch
                 </div>
+              </Link>
+
+              <div className="bookmark-holder">
+                <BsBookmark className="bookmark-button" />
               </div>
             </div>
-
-            <section
-              style={{ transform: `translateY(${-20 * select}%)` }}
-              className="image-slider"
-            >
-              {hightlightMovie.map((film, index) => (
-                <div key={index} className="film-preview">
-                  <Image priority alt="preview" fill src={film.url} />
-                </div>
-              ))}
-
-              <div className="loading-state"></div>
-            </section>
-            {/**------------------------------ */}
           </div>
+
+          <section
+            style={{ transform: `translateY(${-20 * select}%)` }}
+            className="image-slider"
+          >
+            {hightlightMovie.map((film, index) => (
+              <div key={index} className="film-preview">
+                <Image priority alt="preview" fill src={film.url} />
+              </div>
+            ))}
+
+            <div className="loading-state"></div>
+          </section>
+          {/**------------------------------ */}
         </div>
         {/*Right Panel */}
         <div className="main-poster">
           {/*----------POSTER SLIDER--------- */}
-          <div className="poster-holder">
-            <section
-              style={{ transform: `translateY(${-20 * select}%)` }}
-              className="poster-slider"
-            >
-              {hightlightMovie.map((film, index) => (
-                <div key={index} className="poster-element">
-                  <Image
-                    priority
-                    alt="preview"
-                    fill
-                    src={`https://picsum.photos/400/800?random=${index}`}
-                  />
-                </div>
-              ))}
-              <div className="loading-state"></div>
-            </section>
-          </div>
+
+          <section
+            style={{ transform: `translateY(${-20 * select}%)` }}
+            className="poster-slider"
+          >
+            {hightlightMovie.map((film, index) => (
+              <div key={index} className="poster-element">
+                <Image
+                  priority
+                  alt="preview"
+                  fill
+                  src={`https://picsum.photos/400/800?random=${index}`}
+                />
+              </div>
+            ))}
+            <div className="loading-state"></div>
+          </section>
+
           {/** ---------------------*/}
         </div>
       </section>

@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { TfiMenu } from "react-icons/tfi";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 export default function AltNavigationBar({ check }) {
   const altNav = useRef();
   const [navOption, setNavOption] = useState({
@@ -13,8 +14,10 @@ export default function AltNavigationBar({ check }) {
         setNavOption({ style: "fade out", mount: true });
     }
     if (navOption.mount) document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, [navOption]);
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+    };
+  }, [navOption, check]);
 
   function animationEndHandler() {
     if (navOption.mount && navOption.style === "fade out")
@@ -33,6 +36,11 @@ export default function AltNavigationBar({ check }) {
       />
       {navOption.mount && (
         <section
+          onBlur={(e) => {
+            if (altNav.current && !altNav.current.contains(e.target))
+              setNavOption({ style: "fade out", mount: true });
+          }}
+          tabIndex={1}
           onAnimationEnd={animationEndHandler}
           ref={altNav}
           className={`alt-nav ${navOption.style === "fade out" && "close"}`}
