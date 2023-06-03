@@ -13,7 +13,7 @@ export default function SpotlightSection() {
 
   return (
     <>
-      <JsCheck />
+      {/* <JsCheck /> */}
       <section className="spotlight-wrapper">
         <section className="home-promotion"></section>
         <section className="home-user">

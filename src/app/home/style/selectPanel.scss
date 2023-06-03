@@ -18,15 +18,16 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 9rem;
-    height: 2rem;
+    width: 80%;
+    height: 32.5%;
+    // background-color: beige;
 
     & .circle {
       cursor: pointer;
       background-color: white;
       position: relative;
-      height: 1.2rem;
-      width: 1.2rem;
+      height: 100%;
+      width: 11%;
       border-radius: 100%;
       transition: all 400ms;
 
@@ -41,7 +42,7 @@
   }
 }
 
-@media screen and (max-width: 880px) {
+@media screen and (max-width: 1100px) {
   .select-panel {
     grid-row: 2;
     grid-column: 2;

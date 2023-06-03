@@ -2,17 +2,21 @@
 import Link from "next/link";
 import { useState } from "react";
 
-export default function PassChange({ params }) {
+export default function PassChange({ searchParams }) {
   const [isLoad, setLoad] = useState(false);
   const [status, setStatus] = useState({ status: null, message: null });
-
+  console.log(status);
   return (
     <>
-      <form onSubmit={(e) => updatePassword(e, setLoad, setStatus)}>
+      <form
+        onSubmit={(e) =>
+          updatePassword(e, setLoad, setStatus, searchParams.token)
+        }
+      >
         <span className="title login-title">PASSWORD RECOVERY</span>
         <section className="login-input-group">
           <input
-            placeholder="Password"
+            placeholder="New password"
             className="login-input username"
           ></input>
           <input
@@ -21,7 +25,11 @@ export default function PassChange({ params }) {
           ></input>
         </section>
 
-        <button className="login-submit" type="submit">
+        <button
+          disabled={searchParams.token ? false : true}
+          className="login-submit"
+          type="submit"
+        >
           Send verification
         </button>
 
@@ -32,7 +40,7 @@ export default function PassChange({ params }) {
               status.status === "fail" ? "fail" : "sucess"
             }`}
           >
-            {status.message}
+            {status.message || "Error! Try again later"}
           </div>
         )}
         <Link href="user/login">

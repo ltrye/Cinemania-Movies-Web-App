@@ -5,6 +5,8 @@ import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
+import { TfiMenu } from "react-icons/tfi";
+import AltNavigationBar from "./AltNavigationBar";
 
 function checkRoute(path) {
   if (path === "/" || !path) return "none";
@@ -24,15 +26,12 @@ function checkRoute(path) {
       case "profile":
         return "profile";
 
-      case "login":
-        return "profile";
-
       default:
         return "none";
     }
   }
 }
-
+//--SEARCH COMPONENT--//
 function SearchBox({}) {
   const searchBox = useRef();
   const [searchOption, setSearchOption] = useState({
@@ -45,9 +44,7 @@ function SearchBox({}) {
       if (searchBox.current && !searchBox.current.contains(e.target))
         setSearchOption({ style: "fade out", mount: true });
     }
-    document.addEventListener("mousedown", handleClick);
-    if (!searchOption.mount)
-      document.removeEventListener("mousedown", handleClick);
+    if (searchOption.mount) document.addEventListener("mousedown", handleClick);
     return () => document.removeEventListener("mousedown", handleClick);
   }, [searchOption]);
 
@@ -79,6 +76,8 @@ function SearchBox({}) {
     </div>
   );
 }
+
+//--NAV-BAR--//
 export default function NavigationBar() {
   let check;
   const path = usePathname();
@@ -86,11 +85,14 @@ export default function NavigationBar() {
   return (
     <>
       <section className="panel">
+        <div className="nav-menu">
+          <AltNavigationBar check={check} />
+        </div>
         <div className="logo">
           <span>TRYE</span>
         </div>
         <div className="navigation-spacer" />
-        <section className="navigation-group">
+        <ul className="navigation-group">
           <div className={`nav-switch ${check}`} />
           <Link href="/home" className="nav-item">
             Home
@@ -101,7 +103,7 @@ export default function NavigationBar() {
           <Link href="/movies" className="nav-item">
             Movies
           </Link>
-        </section>
+        </ul>
         <div>
           <SearchBox />
         </div>
