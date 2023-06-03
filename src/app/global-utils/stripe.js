@@ -1,5 +1,5 @@
 "use client";
-
+import Stripe from "stripe";
 import Cookies from "js-cookie";
 // let productId = await fetch(
 //   "https://movieflix-production.up.railway.app/api/v1/product"
@@ -10,9 +10,9 @@ import Cookies from "js-cookie";
 const pay = async (productId) => {
   console.log(process.env.NODE_ENV);
   //---Get productId-----//
-  // const stripe = Stripe(
-  //   "pk_test_51NCAQOFQZuy2dcaHp0V18YhchNNqFoPMblQnZpTw0XcvNcFcVKiqH1ADAOE5RABjz0OuocvkANwdujt3Ht0DpMrI00YdVH8ERC"
-  // );
+  const stripe = Stripe(
+    "pk_test_51NCAQOFQZuy2dcaHp0V18YhchNNqFoPMblQnZpTw0XcvNcFcVKiqH1ADAOE5RABjz0OuocvkANwdujt3Ht0DpMrI00YdVH8ERC"
+  );
   // console.log(stripe);
   try {
     //--Get checkout session from API--//
@@ -31,9 +31,12 @@ const pay = async (productId) => {
     );
 
     session = await session.json();
-
+    console.log(session);
     //--REDIRECT TO CHECKOUT--//
-    window.location.href = session.session.url;
+    // window.location.href = session.session.url;
+    await stripe.redirectToCheckout({
+      sessionId: session.session.id,
+    });
   } catch (err) {
     alert(err);
   }
