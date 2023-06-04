@@ -43,8 +43,11 @@ export default async function Page({ params }) {
 }
 
 async function getMovie(id) {
-  const movieData = await fetch(`${process.env.BACKEND}film/${id}`, {
-    method: "GET",
-  });
+  const movieData = await fetch(
+    `https://movieflix-production.up.railway.app/api/v1/film/${id}`,
+    {
+      method: "GET",
+    }
+  );
   return movieData.json();
 }
