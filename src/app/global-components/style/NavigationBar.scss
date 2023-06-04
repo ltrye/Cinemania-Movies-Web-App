@@ -4,14 +4,15 @@
   position: sticky;
   position: -webkit-sticky;
   display: block;
+  display: flex;
   top: 0%;
+
   width: 100%;
   height: 3.4rem;
-  z-index: 9999999999999;
+  z-index: 99999999999;
   background-color: #172b48cd;
   backdrop-filter: blur(10px);
   border-bottom: 1px rgba(255, 255, 255, 0.496) solid;
-  display: flex;
   align-items: center;
   justify-content: center;
   padding-right: 4rem;

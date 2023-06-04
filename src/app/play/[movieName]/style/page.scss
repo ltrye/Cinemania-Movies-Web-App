@@ -3,7 +3,7 @@
   height: 50%;
   width: 60%;
   object-fit: fill;
-  margin: 8vh auto;
+  margin: 8vh auto 10px;
   display: block;
   overflow: hidden;
   border-radius: 10px;
@@ -12,7 +12,7 @@
 @media screen and (max-width: 700px) {
   .video-config {
     width: 80%;
-    margin: 30vh auto;
+    margin: 30vh auto 10px;
   }
 }
 /* Change all text and icon colors in the player. */
@@ -41,8 +41,10 @@
 
 .play-title {
   font-family: "Roboto";
+  font-size: 1.2rem;
+
   color: white;
   position: relative;
-  margin-left: 43vh;
-  margin-top: -3rem;
+  display: block;
+  text-align: center;
 }
