@@ -8,6 +8,7 @@ import { CgProfile } from "react-icons/cg";
 import { TfiMenu } from "react-icons/tfi";
 import AltNavigationBar from "./AltNavigationBar";
 
+import SearchBox from "./SearchBox";
 function checkRoute(path) {
   if (path === "/" || !path) return "none";
   else {
@@ -32,51 +33,69 @@ function checkRoute(path) {
   }
 }
 //--SEARCH COMPONENT--//
-function SearchBox({}) {
-  const searchBox = useRef();
-  const [searchOption, setSearchOption] = useState({
-    style: null,
-    mount: false,
-  });
+// function SearchBox({}) {
+//   const [searchList, setSearchList] = useState([]);
 
-  useEffect(() => {
-    function handleClick(e) {
-      if (searchBox.current && !searchBox.current.contains(e.target))
-        setSearchOption({ style: "fade out", mount: true });
-    }
-    if (searchOption.mount) document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, [searchOption]);
+//   const searchBox = useRef();
+//   const [searchOption, setSearchOption] = useState({
+//     style: null,
+//     mount: false,
+//   });
 
-  function transitionEndHandler() {
-    if (searchOption.mount && searchOption.style === "fade out")
-      setSearchOption({ style: null, mount: false });
-  }
-  return (
-    <>
-      <AiOutlineSearch
-        onClick={() => {
-          if (searchOption.mount)
-            setSearchOption({ style: "fade out", mount: true });
-          else setSearchOption({ style: null, mount: true });
-        }}
-        className="search-icon"
-      />
-      <div ref={searchBox} tabIndex={0} className="search-wrapper">
-        {searchOption.mount && (
-          <section
-            onAnimationEnd={transitionEndHandler}
-            className={`search-box ${
-              searchOption.style === "fade out" && "search-close "
-            }`}
-          >
-            <input placeholder="DITMEHOGMINH" className="nav-input"></input>
-          </section>
-        )}
-      </div>
-    </>
-  );
-}
+//   useEffect(() => {
+//     function handleClick(e) {
+//       if (searchBox.current && !searchBox.current.contains(e.target))
+//         setSearchOption({ style: "fade out", mount: true });
+//     }
+//     if (searchOption.mount) document.addEventListener("mousedown", handleClick);
+//     return () => document.removeEventListener("mousedown", handleClick);
+//   }, [searchOption]);
+
+//   function transitionEndHandler() {
+//     if (searchOption.mount && searchOption.style === "fade out")
+//       setSearchOption({ style: null, mount: false });
+//   }
+//   return (
+//     <>
+//       <AiOutlineSearch
+//         onClick={() => {
+//           if (searchOption.mount)
+//             setSearchOption({ style: "fade out", mount: true });
+//           else setSearchOption({ style: null, mount: true });
+//         }}
+//         className="search-icon"
+//       />
+//       <div ref={searchBox} tabIndex={0} className="search-wrapper">
+//         {searchOption.mount && (
+//           <section
+//             onAnimationEnd={transitionEndHandler}
+//             className={`search-box ${
+//               searchOption.style === "fade out" && "search-close "
+//             }`}
+//           >
+//             <form
+//               onSubmit={async (e) => {
+//                 const searchRes = await requestSearch(e);
+//                 setSearchList(searchRes.data);
+//               }}
+//             >
+//               <input placeholder="DITMEHOGMINH" className="nav-input"></input>
+//             </form>
+//             <div className="">
+//               {searchList.map((el, index) => {
+//                 return (
+//                   <div style={{ color: "white" }} key={index}>
+//                     {el.name}
+//                   </div>
+//                 );
+//               })}
+//             </div>
+//           </section>
+//         )}
+//       </div>
+//     </>
+//   );
+// }
 
 //--NAV-BAR--//
 export default function NavigationBar() {

@@ -23,7 +23,7 @@ export default function AltNavigationBar({ check }) {
     if (navOption.mount && navOption.style === "fade out")
       setNavOption({ style: null, mount: false });
   }
-  console.log(navOption);
+
   return (
     <>
       <TfiMenu

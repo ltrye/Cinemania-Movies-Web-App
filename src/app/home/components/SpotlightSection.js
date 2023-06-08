@@ -5,22 +5,82 @@ import { useState } from "react";
 //ICON/////
 import { FaPlay } from "react-icons/fa";
 import { BsBookmark } from "react-icons/bs";
+import { IoPlayOutline } from "react-icons/io";
+import { HiOutlinePlay } from "react-icons/hi2";
 import JsCheck from "@/app/global-components/JsCheck";
 import checkLoggin from "@/app/global-utils/checkLogin";
+import saveTolist from "@/app/global-utils/saveToList";
 
-export default function SpotlightSection() {
+function PreviewDescription({ title, date, genres }) {
+  const year = new Date(date).getFullYear();
+
+  return (
+    <>
+      <h1 className="home-main-title">
+        {title}
+
+        <div className="home-line"></div>
+      </h1>
+      <section className="description-wrapper">
+        <span className="preview-date">
+          {year} |{" "}
+          <span style={{ color: "yellow", opacity: "0.9" }}>IMDb 8.2</span>
+        </span>
+        <span className="useFont home-description">
+          In a post-apocalyptic world, a group of survivors embarks on a daring
+          mission to find a mythical paradise believed to hold the key to
+          humanity's salvation.
+        </span>
+        <div className="preview-tag-wrapper">
+          {genres.map((el) => (
+            <div key={el} className="preview-tag">
+              {el}
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
+  );
+}
+
+export default function SpotlightSection({ userName, filmList }) {
   const [select, setSelect] = useState(0);
 
   return (
     <>
       {/* <JsCheck /> */}
+      <section className="useFont home-intro">
+        Welcome back,
+        <span style={{ fontSize: "1.3rem", color: "#01c38d" }}>{userName}</span>
+        <span style={{ fontSize: "2rem" }}>🌳 </span>
+      </section>
       <section className="spotlight-wrapper">
+        <div className="home-next-icon">
+          <HiOutlinePlay
+            onClick={() => {
+              if (select === 0) return setSelect(4);
+              setSelect(select - 1);
+            }}
+            style={{
+              width: "2rem",
+              height: "2rem",
+              transform: "rotate(180deg)",
+            }}
+          />
+          <HiOutlinePlay
+            onClick={() => {
+              if (select === 4) return setSelect(0);
+              setSelect(select + 1);
+            }}
+            style={{ width: "2rem", height: "2rem" }}
+          />
+        </div>
         <section className="home-promotion"></section>
-        <section className="home-user">
+        {/* <section className="home-user">
           <div className="home-user-ava">
             <Image fill src="/ava-demo.jpg" />
           </div>
-        </section>
+        </section> */}
         {/*----------SELECT PANEL---------*/}
         <div className="select-panel">
           <div className="poster-select">
@@ -28,45 +88,47 @@ export default function SpotlightSection() {
               <div
                 onClick={() => setSelect(index)}
                 key={index}
-                className={`circle ${index === select ? "black" : ""}`}
+                className={`circle ${index === select ? "green" : ""}`}
               ></div>
             ))}
           </div>
         </div>
         {/**--------------------------- */}
         {/*Left Panel */}
-        <div className="main-preview">
-          {/*---------IMAGE SLIDER--------- */}
-          <div className="preview-info">
-            <PreviewDescription
-              title={hightlightMovie[select].title}
-              date={hightlightMovie[select].date}
-              genre={hightlightMovie[select].genre}
-            />
-            <div className="preview-button">
-              <Link
-                className="button-link"
-                href={`/title/${"646c2e831bb1f740d0421e45"}`}
-              >
-                <div className="play-button">
-                  <FaPlay className="home-play-icon" />
-                  Watch
-                </div>
-              </Link>
+        {/*---------IMAGE SLIDER--------- */}
+        <div className="preview-button">
+          <Link
+            className="home-play-button"
+            href={`/title/${filmList[select].id}`}
+          >
+            <FaPlay className="home-play-icon" />
+            Watch
+          </Link>
 
-              <div className="bookmark-holder">
-                <BsBookmark className="bookmark-button" />
-              </div>
-            </div>
+          <div
+            onClick={() => {
+              saveTolist(filmList[select].id);
+            }}
+            className="bookmark-holder"
+          >
+            <BsBookmark className="bookmark-button" />
           </div>
+        </div>
 
+        <PreviewDescription
+          title={filmList[select].name}
+          date={filmList[select].date}
+          genres={filmList[select].genres}
+        />
+
+        <div className="main-preview">
           <section
             style={{ transform: `translateY(${-20 * select}%)` }}
             className="image-slider"
           >
-            {hightlightMovie.map((film, index) => (
+            {filmList.map((film, index) => (
               <div key={index} className="film-preview">
-                <Image priority alt="preview" fill src={film.url} />
+                <Image priority alt="preview" fill src={film.filmImage} />
               </div>
             ))}
 
@@ -105,49 +167,32 @@ export default function SpotlightSection() {
 const hightlightMovie = [
   {
     url: "/demo-image.jpg",
-    title: "Trye1",
+    title: "Life of Trye1",
     date: "2022",
     genre: ["anime", "fantasy", "adventure"],
   },
   {
     url: "/demo2.jpg",
-    title: "Trye2",
+    title: "Life of Trye2",
     date: "20232",
     genre: ["sci-fi", "horror", "adventure"],
   },
   {
     url: "/demo-image.jpg",
-    title: "Trye3",
+    title: "Life of Trye3",
     date: "20212",
     genre: ["adasda", "fantasdsy", "adventure"],
   },
   {
     url: "/demo2.jpg",
-    title: "Trye4",
+    title: "Life of Trye4",
     date: "202e2",
     genre: ["anime", "fgdg", "adventure"],
   },
   {
     url: "/demo-image.jpg",
-    title: "Trye5",
+    title: "Life of Trye5",
     date: "20232",
     genre: ["andsfime", "fantdasy", "adventure"],
   },
 ];
-
-function PreviewDescription({ title, date, genre }) {
-  console.log(genre);
-  return (
-    <section className="description-wrapper">
-      <h1 className="main-title">{title}</h1>
-      <span className="preview-date">${date} | IMDb 8.2</span>
-      <div className="preview-tag-wrapper">
-        {genre.map((el) => (
-          <div key={el} className="preview-tag">
-            {el}
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}

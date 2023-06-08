@@ -5,11 +5,13 @@ import { FaPlay } from "react-icons/fa";
 import { BsBookmark } from "react-icons/bs";
 
 import Link from "next/link";
+import saveTolist, { SaveButton } from "@/app/global-utils/saveToList";
 
 export default async function Page({ params }) {
-  const data = await getMovie();
-  const movieData = data.data[0];
-  const date = new Date(movieData.date).getFullYear();
+  const movieData = await getMovie(params.movieName);
+  const { data } = movieData;
+  const date = new Date(data.date).getFullYear();
+
   return (
     <>
       {/* <span style={{ fontSize: "1.5rem" }}>title/{params.movieName}</span> */}
@@ -25,14 +27,14 @@ export default async function Page({ params }) {
         </div>
         <div className="right-panel">
           <div className="top-panel">
-            <h1 className="title">{movieData.name}</h1>
+            <h1 className="title">{data.name}</h1>
             <span className="title-date">
-              {date} | {movieData.filmType}
+              {date} | {data.filmType}
             </span>
 
-            <div className="description">{movieData.description}</div>
+            <div className="description">{data.description}</div>
             <div className="preview-tag-wrapper">
-              {movieData.genres.map((el) => (
+              {data.genres.map((el) => (
                 <div key={el} className="preview-tag">
                   {el}
                 </div>
@@ -46,9 +48,7 @@ export default async function Page({ params }) {
                 Watch now
               </button>
             </Link>
-            <button className="bookmark-button">
-              <BsBookmark style={{ height: "1.5rem", width: "1.5rem" }} />
-            </button>
+            <SaveButton id={params.movieName} />
           </div>
         </div>
       </section>
@@ -56,10 +56,10 @@ export default async function Page({ params }) {
   );
 }
 
-async function getMovie() {
+async function getMovie(id) {
   //--Revalidate in production mode//
   const res = await fetch(
-    "https://movieflix-production.up.railway.app/api/v1/film",
+    `https://movieflix-production.up.railway.app/api/v1/film/${id}`,
     { next: { revalidate: 10 } }
   );
   if (!res.ok) {
