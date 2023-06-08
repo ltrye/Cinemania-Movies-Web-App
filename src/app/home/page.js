@@ -9,13 +9,10 @@ import checkLogin from "../global-utils/checkLogin";
 
 export default async function Page() {
   const filmList = await getFilmList();
-  const user = await checkLogin();
-  let userName;
-  if (user.status === "fail") userName = "Not login";
-  else userName = user.data.name;
+
   return (
     <>
-      <SpotlightSection userName={userName} filmList={filmList.data} />
+      <SpotlightSection filmList={filmList.data} />
       <Premium />
       <FilmSection />
       <FilmSection />

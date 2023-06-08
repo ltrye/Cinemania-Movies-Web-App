@@ -1,14 +1,14 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 //ICON/////
 import { FaPlay } from "react-icons/fa";
 import { BsBookmark } from "react-icons/bs";
-import { IoPlayOutline } from "react-icons/io";
+
 import { HiOutlinePlay } from "react-icons/hi2";
 import JsCheck from "@/app/global-components/JsCheck";
-import checkLoggin from "@/app/global-utils/checkLogin";
+import checkLogin from "@/app/global-utils/checkLogin";
 import saveTolist from "@/app/global-utils/saveToList";
 
 function PreviewDescription({ title, date, genres }) {
@@ -43,15 +43,31 @@ function PreviewDescription({ title, date, genres }) {
   );
 }
 
-export default function SpotlightSection({ userName, filmList }) {
+export default function SpotlightSection({ filmList }) {
+  const userName = useRef();
   const [select, setSelect] = useState(0);
+  useEffect(() => {
+    async function checkUser() {
+      const user = await checkLogin();
+      console.log(user);
+
+      if (user.status === "fail")
+        return (userName.current.innerHTML = " NOT LOGIN");
+      else return (userName.current.innerHTML = " " + user.data.name);
+    }
+
+    console.log(checkUser());
+  });
 
   return (
     <>
       {/* <JsCheck /> */}
       <section className="useFont home-intro">
         Welcome back,
-        <span style={{ fontSize: "1.3rem", color: "#01c38d" }}>{userName}</span>
+        <span
+          ref={userName}
+          style={{ fontSize: "1.3rem", color: "#01c38d" }}
+        ></span>
         <span style={{ fontSize: "2rem" }}>🌳 </span>
       </section>
       <section className="spotlight-wrapper">
