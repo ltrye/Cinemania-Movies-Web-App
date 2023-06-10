@@ -46,30 +46,57 @@ function PreviewDescription({ title, date, genres }) {
 export default function SpotlightSection({ filmList }) {
   const userName = useRef();
   const [select, setSelect] = useState(0);
+  const [welcomeText, setWelcomeText] = useState(null);
+
+  //--CHECK IF CLIENT IS LOGGED IN, SET WELCOME TEXT--//
   useEffect(() => {
     async function checkUser() {
       const user = await checkLogin();
-      console.log(user);
 
-      if (user.status === "fail")
-        return (userName.current.innerHTML = " NOT LOGIN");
-      else return (userName.current.innerHTML = " " + user.data.name);
+      if (user.status === "fail") setWelcomeText("none");
+      else setWelcomeText(user.data.name);
     }
-
-    console.log(checkUser());
-  });
+    checkUser();
+  }, []);
 
   return (
     <>
       {/* <JsCheck /> */}
       <section className="useFont home-intro">
-        Welcome back,
-        <span
-          ref={userName}
-          style={{ fontSize: "1.3rem", color: "#01c38d" }}
-        ></span>
-        <span style={{ fontSize: "2rem" }}>🌳 </span>
+        {welcomeText &&
+          (welcomeText !== "none" ? (
+            <span
+              ref={userName}
+              className="welcome-text"
+              style={{ fontSize: "1.3rem", color: "white" }}
+            >
+              Welcome back,{" "}
+              <strong style={{ fontSize: "1.3rem", color: "#01c38d" }}>
+                {welcomeText}
+              </strong>
+              🌳
+            </span>
+          ) : (
+            <span
+              ref={userName}
+              className="welcome-text"
+              style={{
+                fontSize: "1.3rem",
+                color: "#01c38d",
+                cursor: "pointer",
+              }}
+            >
+              <ins onClick={() => (window.location.href = "/user/login")}>
+                Login
+              </ins>{" "}
+              or{" "}
+              <ins onClick={() => (window.location.href = "/user/signup")}>
+                Sign up
+              </ins>
+            </span>
+          ))}
       </section>
+
       <section className="spotlight-wrapper">
         <div className="home-next-icon">
           <HiOutlinePlay

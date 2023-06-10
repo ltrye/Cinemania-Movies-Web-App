@@ -34,6 +34,17 @@ export default function VideoJS(props) {
       const trueVideo = document.querySelector(".vjs-tech");
       trueVideo.appendChild(track);
       ///////////////////////
+      // Fetching for blob
+      // fetch(
+      //   "https://public.sn.files.1drv.com/y4mSw3xTuk9fIybuMhO1v8-htuZOf9cXXEVouOcHxVe4TAC3BwmBK3tJapqQCHP3ME5gACuY7bkv3l61x7qTxUuNB3N3neK5YNE-To4t3v4l8XDvow9gD4qg23jr1XU0El3sxcR6ECZNyVvf-RPIlmd7KYuu-vdTcB1Ajvfmb_7sBVN3nb4YbHypfK6ZFVSaZSz"
+      // )
+      //   .then((result) => result.blob())
+      //   .then((blob) => {
+      //     const blobURL = URL.createObjectURL(blob);
+      //     player.src({ src: blobURL, type: "video/mp4" });
+      //   })
+      //   .catch((err) => console.log(err));
+      //
     } else {
       const player = playerRef.current;
 
