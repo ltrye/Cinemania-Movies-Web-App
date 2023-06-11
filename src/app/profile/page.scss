@@ -183,6 +183,7 @@
     background-color: azure;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
     & .save-image {
       position: relative;
       width: 100%;
@@ -194,7 +195,9 @@
       height: 20%;
       color: white;
       text-align: center;
-      vertical-align: middle;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background-color: rgba(0, 0, 0, 0.742);
     }
   }
