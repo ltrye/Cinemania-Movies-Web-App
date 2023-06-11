@@ -11,9 +11,9 @@ export default async function SaveList({ id }) {
           return (
             <div className="save-element">
               <div className="save-image">
-                <Image />
+                <Image href={el.poster} />
               </div>
-              <div className="save-description">{el}</div>
+              <div className="save-description">{el.name}</div>
             </div>
           );
         })}
