@@ -1,4 +1,5 @@
 "use client";
+import SkeletonLoader from "../components/SkeletonLoader";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
@@ -17,7 +18,7 @@ export default function SaveList({ id }) {
   return (
     <>
       <section className="profile-save-container">
-        {list &&
+        {list ? (
           list.map((el) => {
             return (
               <div className="save-element">
@@ -27,7 +28,10 @@ export default function SaveList({ id }) {
                 <div className="save-description">{el.name}</div>
               </div>
             );
-          })}
+          })
+        ) : (
+          <SkeletonLoader />
+        )}
       </section>
     </>
   );
