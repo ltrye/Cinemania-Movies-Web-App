@@ -11,26 +11,65 @@ import JsCheck from "@/app/global-components/JsCheck";
 import checkLogin from "@/app/global-utils/checkLogin";
 import saveTolist from "@/app/global-utils/saveToList";
 
+let pos = { x: 0, y: 0 };
+let dragging = true;
+
+function smoothScrollTo(element, to, duration) {
+  const start = element.scrollLeft;
+  const change = to - start;
+  const startTime = performance.now();
+
+  function scroll(timestamp) {
+    const currentTime = timestamp - startTime;
+    const scrollValue = easeInOutCubic(currentTime, start, change, duration);
+    element.scrollLeft = scrollValue;
+
+    if (currentTime < duration) {
+      requestAnimationFrame(scroll);
+    }
+  }
+
+  requestAnimationFrame(scroll);
+}
+
+// Easing function for smooth scroll
+function easeInOutQuad(t, b, c, d) {
+  t /= d / 2;
+  if (t < 1) return (c / 2) * t * t + b;
+  t--;
+  return (-c / 2) * (t * (t - 2) - 1) + b;
+}
+function easeInOutCubic(t, b, c, d) {
+  t /= d / 2;
+  if (t < 1) return (c / 2) * t * t * t + b;
+  t -= 2;
+  return (c / 2) * (t * t * t + 2) + b;
+}
 function PreviewDescription({ title, date, genres }) {
   const year = new Date(date).getFullYear();
 
   return (
     <>
       <h1 className="home-main-title">
-        {title}
-
-        <div className="home-line"></div>
-      </h1>
-      <section className="description-wrapper">
-        <span className="preview-date">
+        <div className="home-feature-title">
+          <div className="style-block" />
+          <span style={{ color: "#44C1D3" }}>
+            Cinemania <span style={{ color: "white" }}>recommend</span>
+          </span>{" "}
+        </div>
+        Lorem ipsum dolor sit amet
+        {/* <div className="home-line"></div> */}
+        <div className="preview-date">
           {year} |{" "}
-          <span style={{ color: "yellow", opacity: "0.9" }}>IMDb 8.2</span>
-        </span>
-        <span className="useFont home-description">
+          <span style={{ color: "#44C1D3", opacity: "0.9" }}>Romance</span>
+        </div>
+        <div className="useFont home-description">
           In a post-apocalyptic world, a group of survivors embarks on a daring
           mission to find a mythical paradise believed to hold the key to
           humanity's salvation.
-        </span>
+        </div>
+      </h1>
+      {/* <section className="description-wrapper">
         <div className="preview-tag-wrapper">
           {genres.map((el) => (
             <div key={el} className="preview-tag">
@@ -38,7 +77,7 @@ function PreviewDescription({ title, date, genres }) {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
     </>
   );
 }
@@ -47,7 +86,9 @@ export default function SpotlightSection({ filmList }) {
   const userName = useRef();
   const [select, setSelect] = useState(0);
   const [welcomeText, setWelcomeText] = useState(null);
-
+  const [autoSlider, setAutoSlider] = useState(true);
+  const slider = useRef();
+  const sliderContainer = useRef();
   //--CHECK IF CLIENT IS LOGGED IN, SET WELCOME TEXT--//
   useEffect(() => {
     async function checkUser() {
@@ -58,7 +99,61 @@ export default function SpotlightSection({ filmList }) {
     }
     checkUser();
   }, []);
+  ///SCROLLER//
+  const mouseMoveHandler = function (e) {
+    // if (!dragging) return;
+    sliderContainer.current.style.pointerEvents = "none";
+    const dx = e.clientX - pos.x;
+    const dy = e.clientY - pos.y;
 
+    // Scroll the element
+
+    slider.current.scrollLeft = pos.left - dx;
+  };
+  const mouseDownHandler = function (e, slider, sliderContainer) {
+    dragging = true;
+    pos = {
+      // The current scroll
+      left: e.currentTarget.scrollLeft,
+
+      // Get the current mouse position
+      x: e.clientX,
+      y: e.clientY,
+    };
+    document.addEventListener("mousemove", mouseMoveHandler);
+    document.addEventListener("mouseup", mouseUpHandler);
+  };
+  const mouseUpHandler = function (e) {
+    document.removeEventListener("mouseup", mouseUpHandler);
+    document.removeEventListener("mousemove", mouseMoveHandler);
+    sliderContainer.current.style.pointerEvents = "auto";
+  };
+
+  //Go through the last poster when first mount
+  useEffect(() => {
+    smoothScrollTo(slider.current, 300, 1500);
+    setSelect(4);
+  }, []);
+  //--Change the slide show every 3 second
+  useEffect(() => {
+    console.log(autoSlider);
+    if (autoSlider) {
+      let currentSelect = select;
+      const autoSlide = setInterval(() => {
+        console.log(currentSelect);
+        if (currentSelect === 5) {
+          setSelect(0);
+          currentSelect = 0;
+        } else {
+          setSelect(currentSelect);
+          currentSelect++;
+        }
+        if (currentSelect > 3) smoothScrollTo(slider.current, 285, 1500);
+        else smoothScrollTo(slider.current, 0, 1500);
+      }, 2500);
+      return () => clearInterval(autoSlide);
+    }
+  }, [autoSlider]);
   return (
     <>
       {/* <JsCheck /> */}
@@ -68,7 +163,7 @@ export default function SpotlightSection({ filmList }) {
             <span
               ref={userName}
               className="welcome-text"
-              style={{ fontSize: "1.3rem", color: "white" }}
+              style={{ fontSize: "1.1rem", color: "white" }}
             >
               Welcome back,{" "}
               <strong style={{ fontSize: "1.3rem", color: "#01c38d" }}>
@@ -98,46 +193,6 @@ export default function SpotlightSection({ filmList }) {
       </section>
 
       <section className="spotlight-wrapper">
-        <div className="home-next-icon">
-          <HiOutlinePlay
-            onClick={() => {
-              if (select === 0) return setSelect(4);
-              setSelect(select - 1);
-            }}
-            style={{
-              width: "2rem",
-              height: "2rem",
-              transform: "rotate(180deg)",
-            }}
-          />
-          <HiOutlinePlay
-            onClick={() => {
-              if (select === 4) return setSelect(0);
-              setSelect(select + 1);
-            }}
-            style={{ width: "2rem", height: "2rem" }}
-          />
-        </div>
-        <section className="home-promotion"></section>
-        {/* <section className="home-user">
-          <div className="home-user-ava">
-            <Image fill src="/ava-demo.jpg" />
-          </div>
-        </section> */}
-        {/*----------SELECT PANEL---------*/}
-        <div className="select-panel">
-          <div className="poster-select">
-            {[...Array(5)].map((el, index) => (
-              <div
-                onClick={() => setSelect(index)}
-                key={index}
-                className={`circle ${index === select ? "green" : ""}`}
-              ></div>
-            ))}
-          </div>
-        </div>
-        {/**--------------------------- */}
-        {/*Left Panel */}
         {/*---------IMAGE SLIDER--------- */}
         <div className="preview-button">
           <Link
@@ -145,17 +200,8 @@ export default function SpotlightSection({ filmList }) {
             href={`/title/${filmList[select].id}`}
           >
             <FaPlay className="home-play-icon" />
-            Watch
+            {/* Watch */}
           </Link>
-
-          <div
-            onClick={() => {
-              saveTolist(filmList[select].id);
-            }}
-            className="bookmark-holder"
-          >
-            <BsBookmark className="bookmark-button" />
-          </div>
         </div>
 
         <PreviewDescription
@@ -180,21 +226,36 @@ export default function SpotlightSection({ filmList }) {
           {/**------------------------------ */}
         </div>
         {/*Right Panel */}
-        <div className="main-poster">
-          {/*----------POSTER SLIDER--------- */}
-
+        {/*----------POSTER SLIDER--------- */}
+        <div
+          ref={slider}
+          onMouseDown={(e) => mouseDownHandler(e, slider, sliderContainer)}
+          onMouseLeave={() => !autoSlider && setAutoSlider(true)}
+          className="main-poster"
+        >
           <section
-            style={{ transform: `translateY(${-20 * select}%)` }}
+            tabIndex={1}
+            ref={sliderContainer}
+            style={{}}
             className="poster-slider"
           >
-            {hightlightMovie.map((film, index) => (
-              <div key={index} className="poster-element">
-                <Image
-                  priority
-                  alt="preview"
-                  fill
-                  src={`https://picsum.photos/400/800?random=${index}`}
-                />
+            {[...Array(5)].map((film, index) => (
+              <div
+                onClick={() => {
+                  setAutoSlider(false);
+                  setSelect(index);
+                }}
+                key={index}
+                className={`poster-element ${select === index && "active"}`}
+              >
+                <div className="poster-image">
+                  <Image
+                    priority
+                    alt="preview"
+                    fill
+                    src={`https://picsum.photos/400/800?random=${index}`}
+                  />
+                </div>
               </div>
             ))}
             <div className="loading-state"></div>
@@ -206,36 +267,3 @@ export default function SpotlightSection({ filmList }) {
     </>
   );
 }
-
-const hightlightMovie = [
-  {
-    url: "/demo-image.jpg",
-    title: "Life of Trye1",
-    date: "2022",
-    genre: ["anime", "fantasy", "adventure"],
-  },
-  {
-    url: "/demo2.jpg",
-    title: "Life of Trye2",
-    date: "20232",
-    genre: ["sci-fi", "horror", "adventure"],
-  },
-  {
-    url: "/demo-image.jpg",
-    title: "Life of Trye3",
-    date: "20212",
-    genre: ["adasda", "fantasdsy", "adventure"],
-  },
-  {
-    url: "/demo2.jpg",
-    title: "Life of Trye4",
-    date: "202e2",
-    genre: ["anime", "fgdg", "adventure"],
-  },
-  {
-    url: "/demo-image.jpg",
-    title: "Life of Trye5",
-    date: "20232",
-    genre: ["andsfime", "fantdasy", "adventure"],
-  },
-];

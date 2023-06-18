@@ -20,6 +20,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <NavigationBar />
+        {/* <section className="image-trace"></section> */}
         {children}
       </body>
     </html>

@@ -28,7 +28,7 @@ export default async function Page({ params }) {
     ],
     sources: [
       {
-        src: "https://movieflix-production.up.railway.app/video",
+        src: "https://movieflix-production.up.railway.app/api/v1/video/646c2e831bb1f740d0421e45",
         type: "video/mp4",
       },
     ],

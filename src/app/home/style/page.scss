@@ -1,3 +1,36 @@
 @import "./spotlightSection.scss";
 @import "./selectPanel.scss";
 @import "./premium.scss";
+
+.home-explore {
+  position: relative;
+  display: flex;
+  width: 9rem;
+  justify-content: center;
+  gap: 0.7rem;
+  align-items: center;
+  border-radius: 15px;
+  margin: 1rem auto;
+  color: var(--light-blue);
+  padding: 0.75rem;
+}
+.explore {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.1rem;
+}
+.arrow-down-icon {
+  color: white;
+  width: 2rem;
+  height: 1.5rem;
+  transform: translateY(-5px);
+  animation: bouncing 700ms infinite alternate;
+}
+
+@keyframes bouncing {
+  from {
+    transform: translateY(-5px);
+  }
+  to {
+    transform: translateY(5px);
+  }
+}

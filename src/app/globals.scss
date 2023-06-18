@@ -28,7 +28,8 @@ $white: #ffffff;
 }
 
 html {
-  --blue-pallete: #030a18;
+  --light-blue: #44c1d3;
+  --blue-pallete: #000000;
   --dark-blue: #0e263d;
   --green-pallete: #00d397;
   overflow-x: hidden;
@@ -36,6 +37,7 @@ html {
 
 body {
   background-color: var(--blue-pallete);
+
   // max-width: 100vw;
   // font-family: "Roboto", sans-serif;
 
@@ -140,4 +142,18 @@ a {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:over {
   background: #555;
+}
+
+.image-trace {
+  position: absolute;
+  top: 0%;
+  // z-index: 99999999999999999999999;
+  background-image: url("/trace.png");
+  background-size: contain;
+  width: 100%;
+  height: 100vh;
+  opacity: 50%;
+  pointer-events: none;
+  // background-position: center center;
+  background-repeat: no-repeat;
 }

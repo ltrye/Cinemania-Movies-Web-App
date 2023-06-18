@@ -108,12 +108,15 @@ export default function NavigationBar() {
         <AltNavigationBar check={check} />
 
         <div className="logo">
-          <span>TRYE</span>
+          <span>TRYE 🎬</span>
         </div>
         <div className="navigation-spacer" />
         <ul className="navigation-group">
-          <div className={`nav-switch ${check}`} />
-          <Link href="/home" className="nav-item">
+          {/* <div className={`nav-switch ${check}`} /> */}
+          <Link
+            href="/home"
+            className={`nav-item ${path === "/home" && "active"}`}
+          >
             Home
           </Link>
           <Link href="/series" className="nav-item">
