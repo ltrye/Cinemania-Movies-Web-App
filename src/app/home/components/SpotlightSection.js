@@ -51,12 +51,12 @@ function PreviewDescription({ title, date, genres }) {
   return (
     <>
       <h1 className="home-main-title">
-        <div className="home-feature-title">
+        {/* <div className="home-feature-title">
           <div className="style-block" />
           <span style={{ color: "#44C1D3" }}>
             Cinemania <span style={{ color: "white" }}>recommend</span>
           </span>{" "}
-        </div>
+        </div> */}
         Lorem ipsum dolor sit amet
         {/* <div className="home-line"></div> */}
         <div className="preview-date">
@@ -231,6 +231,8 @@ export default function SpotlightSection({ filmList }) {
           ref={slider}
           onMouseDown={(e) => mouseDownHandler(e, slider, sliderContainer)}
           onMouseLeave={() => !autoSlider && setAutoSlider(true)}
+          onMouseEnter={() => setAutoSlider(false)}
+          onTouchStart={() => setAutoSlider(false)}
           className="main-poster"
         >
           <section
@@ -242,7 +244,6 @@ export default function SpotlightSection({ filmList }) {
             {[...Array(5)].map((film, index) => (
               <div
                 onClick={() => {
-                  setAutoSlider(false);
                   setSelect(index);
                 }}
                 key={index}
