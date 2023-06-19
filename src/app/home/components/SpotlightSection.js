@@ -131,7 +131,11 @@ export default function SpotlightSection({ filmList }) {
 
   //Go through the last poster when first mount
   useEffect(() => {
-    smoothScrollTo(slider.current, 300, 1500);
+    smoothScrollTo(
+      slider.current,
+      slider.current.scrollWidth - slider.current.clientWidth,
+      1500
+    );
     setSelect(4);
   }, []);
   //--Change the slide show every 3 second
@@ -148,7 +152,12 @@ export default function SpotlightSection({ filmList }) {
           setSelect(currentSelect);
           currentSelect++;
         }
-        if (currentSelect > 3) smoothScrollTo(slider.current, 285, 1500);
+        if (currentSelect > 3)
+          smoothScrollTo(
+            slider.current,
+            slider.current.scrollWidth - slider.current.clientWidth,
+            1500
+          );
         else smoothScrollTo(slider.current, 0, 1500);
       }, 2500);
       return () => clearInterval(autoSlide);
