@@ -59,6 +59,7 @@ function PreviewDescription({ title, date, genres }) {
         </div> */}
         Lorem ipsum dolor sit amet
         {/* <div className="home-line"></div> */}
+        <hr style={{ marginTop: "1.2rem" }} />
         <div className="preview-date">
           {year} |{" "}
           <span style={{ color: "#44C1D3", opacity: "0.9" }}>Romance</span>
