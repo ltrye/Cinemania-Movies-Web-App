@@ -33,16 +33,20 @@ html {
   --dark-blue: #0e263d;
   --green-pallete: #00d397;
   overflow-x: hidden;
+  // overflow-x: clip;
+  display: block;
+  // display: flow-root;
+  max-width: 100vw;
 }
 
 body {
   background-color: $grey;
-  overflow-x: hidden;
+  overflow-x: clip;
 
   // max-width: 100vw;
   // font-family: "Roboto", sans-serif;
-
-  display: flow-root;
+  max-width: 100vw;
+  // display: flow-root;
 }
 
 a {
@@ -128,10 +132,11 @@ a {
 /* Scrollbar*/
 ::-webkit-scrollbar {
   width: 8px;
+  background: #00000000;
 }
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f100;
+  background: #00000093;
 }
 
 /* Handle */
@@ -141,8 +146,8 @@ a {
 }
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:over {
-  background: #555;
+::-webkit-scrollbar-thumb:hover {
+  background: #316387;
 }
 
 .image-trace {

@@ -42,10 +42,12 @@
 }
 .spotlight-wrapper {
   position: relative;
+  padding-left: 4%;
+  padding-right: 4%;
   height: 35vw;
-  margin: 1.5% 5%;
+  margin: 1.5% 0;
   // width: calc(100% - 6% * 2);
-  grid-template: 52% auto / auto 35% 56%;
+  grid-template: 46% auto / auto 38% 52%;
   display: grid;
   column-gap: 4.2vw;
   row-gap: 10px;
@@ -54,9 +56,10 @@
     position: absolute;
     content: "";
     background-color: #242e3b;
-    top: -10%;
-    left: -20%;
-    right: -20%;
+    top: -3.4rem;
+
+    left: 0%;
+    right: 0%;
     height: 56%;
   }
 }
@@ -69,7 +72,8 @@
   grid-column: 3;
   overflow: hidden;
   // border-radius: 8px;
-  margin-bottom: 12%;
+  margin-bottom: 14%;
+
   // box-shadow: var(--green-pallete) -8px 10px 0px;
 }
 .image-slider {
@@ -251,13 +255,14 @@
 //--------------POSTER HOLDER--------------------//
 .main-poster {
   position: relative;
-  height: 100%;
+  margin-top: auto;
+  height: 90%;
   width: 100%;
   grid-row: 2;
   grid-column: 1 / span 2;
   animation: slideIn 800ms forwards;
   overflow-x: scroll;
-  overflow-y: visible;
+
   &::-webkit-scrollbar {
     height: 5px;
   }
@@ -277,22 +282,23 @@
   // column-gap: 1rem;
   position: absolute;
   right: 0%;
-  height: 100%;
-  bottom: 0.9rem;
-  // overflow-x: scroll;
-  // overflow-y: visible;
+  height: 95%;
+  bottom: 0.7rem;
   width: 100%;
   transition: all 400ms;
 }
 .poster-image {
   position: relative;
   height: 100%;
-  width: 90%;
+  width: 92%;
   transition: all 200ms;
   transform-origin: bottom;
   border: solid rgba(255, 255, 255, 0) 2px;
 
   &:hover {
+    border: solid white 2px;
+  }
+  &.active {
     border: solid white 2px;
   }
 }
@@ -301,6 +307,9 @@
   width: 30%;
   flex-shrink: 0;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 8px;
   cursor: pointer;
   transition: all 200ms;

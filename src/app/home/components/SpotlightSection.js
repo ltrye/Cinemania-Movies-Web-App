@@ -259,7 +259,7 @@ export default function SpotlightSection({ filmList }) {
                 key={index}
                 className={`poster-element ${select === index && "active"}`}
               >
-                <div className="poster-image">
+                <div className={`poster-image ${select === index && "active"}`}>
                   <Image
                     priority
                     alt="preview"
