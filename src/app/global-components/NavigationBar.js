@@ -119,10 +119,16 @@ export default function NavigationBar() {
           >
             Home
           </Link>
-          <Link href="/series" className="nav-item">
+          <Link
+            href="/series"
+            className={`nav-item ${path === "/series" && "active"}`}
+          >
             Series
           </Link>
-          <Link href="/movies" className="nav-item">
+          <Link
+            href="/movies"
+            className={`nav-item ${path === "/movies" && "active"}`}
+          >
             Movies
           </Link>
         </ul>

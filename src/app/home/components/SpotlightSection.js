@@ -225,9 +225,16 @@ export default function SpotlightSection({ filmList }) {
             style={{ transform: `translateY(${-20 * select}%)` }}
             className="image-slider"
           >
-            {filmList.map((film, index) => (
+            {filmList.slice(0, 5).map((film, index) => (
               <div key={index} className="film-preview">
-                <Image priority alt="preview" fill src={film.filmImage} />
+                <Image
+                  priority
+                  alt="preview"
+                  fill
+                  src={
+                    "https://res.cloudinary.com/dfspqu7kx/image/upload/v1686152845/Film%20Preview/2017-dunkirk_qmz9nj.webp"
+                  }
+                />
               </div>
             ))}
 
