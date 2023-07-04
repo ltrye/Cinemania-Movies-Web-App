@@ -6,6 +6,7 @@ import { BsBookmark } from "react-icons/bs";
 
 import Link from "next/link";
 import saveTolist, { SaveButton } from "@/app/global-utils/saveToList";
+import CommentSection from "./components/Comment";
 
 export default async function Page({ params }) {
   const movieData = await getMovie(params.movieName);
@@ -15,16 +16,17 @@ export default async function Page({ params }) {
   return (
     <>
       {/* <span style={{ fontSize: "1.5rem" }}>title/{params.movieName}</span> */}
-      <div className="style-box"></div>
+
       <section className="description-grid-container">
         <div className="left-panel">
           <Image
             className="title-preview-image"
             alt="movie description"
             fill
-            src="/giphy.gif"
+            src="/title-test.jpg"
           />
         </div>
+
         <div className="right-panel">
           <div className="top-panel">
             <h1 className="title">{data.name}</h1>
@@ -33,16 +35,13 @@ export default async function Page({ params }) {
             </span>
 
             <div className="description">{data.description}</div>
-            <div className="preview-tag-wrapper">
-              {data.genres.map((el) => (
-                <div key={el} className="preview-tag">
-                  {el}
-                </div>
-              ))}
-            </div>
+            <div className="preview-tag-wrapper"></div>
           </div>
           <div className="title-button">
-            <Link href={`/play/${params.movieName}`}>
+            <Link
+              style={{ width: "50%", height: "5rem", position: "relative" }}
+              href={`/play/${params.movieName}`}
+            >
               <button className="title-play-button">
                 <FaPlay />
                 Watch now
@@ -50,6 +49,7 @@ export default async function Page({ params }) {
             </Link>
             <SaveButton id={params.movieName} />
           </div>
+          <CommentSection />
         </div>
       </section>
     </>

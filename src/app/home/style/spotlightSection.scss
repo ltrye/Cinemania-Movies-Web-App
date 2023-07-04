@@ -52,16 +52,6 @@
   column-gap: 4.2vw;
   row-gap: 10px;
   user-select: none;
-  &::before {
-    position: absolute;
-    content: "";
-    background-color: #242e3b;
-    top: -3.4rem;
-
-    left: -4%;
-    right: -4%;
-    height: 56%;
-  }
 }
 
 //----HOME - FILM PREVIEW SLIDER----------//
