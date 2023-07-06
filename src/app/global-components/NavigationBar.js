@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineSearch, AiFillCaretDown } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { TfiMenu } from "react-icons/tfi";
 import AltNavigationBar from "./AltNavigationBar";
@@ -32,73 +32,10 @@ function checkRoute(path) {
     }
   }
 }
-//--SEARCH COMPONENT--//
-// function SearchBox({}) {
-//   const [searchList, setSearchList] = useState([]);
-
-//   const searchBox = useRef();
-//   const [searchOption, setSearchOption] = useState({
-//     style: null,
-//     mount: false,
-//   });
-
-//   useEffect(() => {
-//     function handleClick(e) {
-//       if (searchBox.current && !searchBox.current.contains(e.target))
-//         setSearchOption({ style: "fade out", mount: true });
-//     }
-//     if (searchOption.mount) document.addEventListener("mousedown", handleClick);
-//     return () => document.removeEventListener("mousedown", handleClick);
-//   }, [searchOption]);
-
-//   function transitionEndHandler() {
-//     if (searchOption.mount && searchOption.style === "fade out")
-//       setSearchOption({ style: null, mount: false });
-//   }
-//   return (
-//     <>
-//       <AiOutlineSearch
-//         onClick={() => {
-//           if (searchOption.mount)
-//             setSearchOption({ style: "fade out", mount: true });
-//           else setSearchOption({ style: null, mount: true });
-//         }}
-//         className="search-icon"
-//       />
-//       <div ref={searchBox} tabIndex={0} className="search-wrapper">
-//         {searchOption.mount && (
-//           <section
-//             onAnimationEnd={transitionEndHandler}
-//             className={`search-box ${
-//               searchOption.style === "fade out" && "search-close "
-//             }`}
-//           >
-//             <form
-//               onSubmit={async (e) => {
-//                 const searchRes = await requestSearch(e);
-//                 setSearchList(searchRes.data);
-//               }}
-//             >
-//               <input placeholder="DITMEHOGMINH" className="nav-input"></input>
-//             </form>
-//             <div className="">
-//               {searchList.map((el, index) => {
-//                 return (
-//                   <div style={{ color: "white" }} key={index}>
-//                     {el.name}
-//                   </div>
-//                 );
-//               })}
-//             </div>
-//           </section>
-//         )}
-//       </div>
-//     </>
-//   );
-// }
 
 //--NAV-BAR--//
 export default function NavigationBar() {
+  const genreList = useRef();
   let check;
   const path = usePathname();
   check = checkRoute(path);
@@ -107,9 +44,9 @@ export default function NavigationBar() {
       <section className="panel">
         <AltNavigationBar check={check} />
 
-        <div className="logo">
+        <Link href="/home" className="logo">
           <span>TRYE 🎬</span>
-        </div>
+        </Link>
         <div className="navigation-spacer" />
         <ul className="navigation-group">
           {/* <div className={`nav-switch ${check}`} /> */}
@@ -117,20 +54,37 @@ export default function NavigationBar() {
             href="/home"
             className={`nav-item ${path === "/home" && "active"}`}
           >
-            Home
+            Trang chủ
           </Link>
           <Link
             href="/series"
             className={`nav-item ${path === "/series" && "active"}`}
           >
-            Series
+            Phim lẻ
           </Link>
           <Link
             href="/movies"
             className={`nav-item ${path === "/movies" && "active"}`}
           >
-            Movies
+            Phim bộ
           </Link>
+          <div
+            onClick={(e) => {
+              console.log(genreList.current.classList.length);
+              genreList.current.classList.length === 1
+                ? genreList.current.classList.add("genre-close")
+                : genreList.current.classList.remove("genre-close");
+            }}
+            className={`nav-item`}
+          >
+            Thể loại
+            <AiFillCaretDown />
+          </div>
+          <div ref={genreList} className="genre-list genre-close">
+            <ul>
+              <div></div>
+            </ul>
+          </div>
         </ul>
         <div>
           <SearchBox />

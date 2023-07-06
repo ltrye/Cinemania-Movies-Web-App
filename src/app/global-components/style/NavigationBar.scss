@@ -12,7 +12,7 @@
   z-index: 99999999999;
   background-color: #0000009e;
   backdrop-filter: blur(10px);
-  // border-bottom: 1px rgba(255, 255, 255, 0.496) solid;
+  border-bottom: 1px rgba(255, 255, 255, 0.301) solid;
   align-items: center;
   user-select: none;
   justify-content: flex-start;
@@ -29,6 +29,7 @@
   height: 80%;
   white-space: nowrap;
   margin-right: auto;
+  cursor: pointer;
 }
 
 .navigation-group {
@@ -37,26 +38,35 @@
   color: white;
   flex-direction: row;
   display: flex;
-  justify-content: center;
-  // background-color: rgb(89, 122, 114);
+  justify-content: flex-end;
+  width: inherit;
   font-family: "Roboto", sans-serif;
   font-size: medium;
-  column-gap: 1.5rem;
-
+  column-gap: 1rem;
+  padding: 0;
   & .nav-item {
+    white-space: nowrap;
     cursor: pointer;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 0.5rem;
     padding: 5px 1rem;
-    font-size: 1rem;
+    font-size: 0.95rem;
     transition: all 200ms;
     border-radius: 100px;
+    color: white;
+
+    opacity: 0.6;
     &.active {
-      background-color: azure;
-      color: black;
+      // background-color: azure;
+      // color: black;
+      opacity: 1;
     }
     &:hover {
-      background-color: azure;
-      color: black;
+      // background-color: azure;
+      // color: black;
+      opacity: 1;
     }
     &:active {
       transform: scale(0.9);
@@ -71,9 +81,13 @@
   width: 1.5rem;
   height: 1.5rem;
   margin-right: 2rem;
-  margin-left: 4rem;
+  margin-left: 2rem;
   color: white;
   // justify-self: flex-end;
+  transition: all 200ms;
+  &:active {
+    transform: scale(0.8);
+  }
 }
 .profile-icon {
   position: relative;
@@ -82,8 +96,12 @@
 
   width: 1.8rem;
   height: 1.8rem;
+  transition: all 200ms;
   &.active {
     color: var(--green-pallete);
+  }
+  &:active {
+    transform: scale(0.8);
   }
 }
 
@@ -126,25 +144,6 @@
 
 //-------SEARCH BOX---------//
 
-.search-box {
-  // border: 1px var(--green-pallete) solid;
-  z-index: 99999999999999;
-  backdrop-filter: blur(10px);
-  position: fixed;
-  background-color: #000000d3;
-  backdrop-filter: blur(10px);
-  width: 20rem;
-  height: calc(100vh - 3.4rem);
-  right: 0%;
-  top: 3.4rem;
-  overflow-y: scroll;
-  animation: slide cubic-bezier(0.22, 1, 0.36, 1) 400ms;
-  box-shadow: rgba(0, 0, 0, 0.35) -3px 5px 15px;
-  &.search-close {
-    animation: reverse-slide 400ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    // transform: translateX(0%);
-  }
-}
 .nav-input {
   height: 1.5rem;
   border-radius: 10px;
@@ -205,6 +204,28 @@
   color: white;
   &.active {
     background-color: var(--green-pallete);
+  }
+}
+
+//--GENRE LIST--//
+.genre-list {
+  position: fixed;
+  top: 3.4rem;
+  right: 10vw;
+  width: 20rem;
+  height: 40vh;
+  background-color: rgba(0, 0, 0, 0.773);
+  animation: genre 200ms forwards;
+  &.genre-close {
+    display: none;
+  }
+}
+@keyframes genre {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
   }
 }
 @keyframes navInset {

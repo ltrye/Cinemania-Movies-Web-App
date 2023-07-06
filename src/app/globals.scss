@@ -32,7 +32,7 @@ html {
   --blue-pallete: #000000;
   --grey: #21262e;
   --dark-blue: #0e263d;
-  --green-pallete: #00d397;
+  --green-pallete: #2dc38d;
   overflow-x: hidden;
   // overflow-x: clip;
 
@@ -45,7 +45,7 @@ body {
   // overflow-x: clip;
 
   // max-width: 100vw;
-  // font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
   max-width: 100vw;
   // display: flow-root;
 }
@@ -132,7 +132,7 @@ a {
 
 /* Scrollbar*/
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
   background: #00000000;
 }
 /* Track */
@@ -142,20 +142,21 @@ a {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #dadada;
-  border-radius: 20px;
+  background: #dadadacb;
+
+  // border-radius: 20px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #316387;
+  background: #ffffffda;
 }
 
 .image-trace {
   position: absolute;
   top: 0%;
   // z-index: 99999999999999999999999;
-  background-image: url("/trace.png");
+  background-image: url("/spotlight.png");
   background-size: contain;
   width: 100%;
   height: 100vh;

@@ -15,8 +15,6 @@ export default async function Page({ params }) {
 
   return (
     <>
-      {/* <span style={{ fontSize: "1.5rem" }}>title/{params.movieName}</span> */}
-
       <section className="description-grid-container">
         <div className="left-panel">
           <Image
@@ -43,7 +41,7 @@ export default async function Page({ params }) {
               href={`/play/${params.movieName}`}
             >
               <button className="title-play-button">
-                <FaPlay />
+                <FaPlay style={{ flexShrink: "0" }} />
                 Watch now
               </button>
             </Link>

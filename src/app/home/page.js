@@ -9,29 +9,30 @@ import Premium from "./components/Premium";
 import checkLogin from "../global-utils/checkLogin";
 import SwipeableSlider from "../global-components/slider";
 import MySwiper from "../global-components/slider";
+import getFilmList from "../global-utils/GetFilm";
 
 export default async function Page() {
-  const filmList = await getFilmList();
+  const filmFetchList = await getFilmList();
 
   return (
     <>
-      <SpotlightSection filmList={filmList.data} />
-      <div className="home-explore">
+      <SpotlightSection filmList={filmFetchList.data} />
+      {/* <div className="home-explore">
         <span className="explore">Explore</span>
         <BsChevronDoubleDown className="arrow-down-icon" />
-      </div>
-      <Premium />
-      <FilmSection />
-      <FilmSection />
-      <FilmSection />
+      </div> */}
+
+      <FilmSection filmList={filmFetchList.data} />
+      <FilmSection filmList={filmFetchList.data} />
+      <FilmSection filmList={filmFetchList.data} />
     </>
   );
 }
 
-async function getFilmList() {
-  const movieList = await fetch(
-    `https://movieflix-production.up.railway.app/api/v1/film`,
-    { next: { revalidate: 5 } }
-  );
-  return movieList.json();
-}
+// async function getFilmList() {
+//   const movieList = await fetch(
+//     `https://movieflix-production.up.railway.app/api/v1/film`,
+//     { next: { revalidate: 5 } }
+//   );
+//   return movieList.json();
+// }

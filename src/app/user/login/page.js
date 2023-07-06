@@ -6,6 +6,10 @@ import { useState } from "react";
 export default function Login() {
   const [isLoad, setLoad] = useState(false);
   const [status, setStatus] = useState({ status: null, message: null });
+  const [formValue, setFormValue] = useState({
+    email: null,
+    password: null,
+  });
 
   return (
     <>

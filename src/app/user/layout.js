@@ -21,16 +21,14 @@ export default function Layout({ children }) {
   console.log(path);
 
   return (
-    <div>
-      {
-        <section
-          className={`login-section ${option === "signup" && "extend"}  ${
-            option === "reauth" && "shrink"
-          }`}
-        >
-          {children}
-        </section>
-      }
+    <div className="login-background">
+      <section
+        className={`login-section ${option === "signup" && "extend"}  ${
+          option === "reauth" && "shrink"
+        }`}
+      >
+        {children}
+      </section>
     </div>
   );
 }

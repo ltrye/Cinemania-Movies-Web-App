@@ -1,10 +1,16 @@
 .home-film-section {
   width: 100%;
-  height: 35rem;
+  height: 32rem;
   position: relative;
+  margin-top: 5rem;
   // background-color: rgb(96, 192, 192);
 }
-
+.film-section-title {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 2.4rem;
+  padding-left: 4rem;
+  color: white;
+}
 .film-group-name {
   clip-path: polygon(0 0, 0% 0%, 0vw 100%, 0% 100%);
   position: relative;
@@ -28,12 +34,11 @@
 }
 
 .film-group {
-  // background-color: aquamarine;
+  background-color: #1e2126;
   margin-top: 2rem;
   position: relative;
   height: 20rem;
   width: 100%;
-  // background-color: var(--green-pallete);
   padding: 0 1rem 2rem 1rem;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -58,7 +63,7 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    column-gap: 25px;
+    column-gap: 20px;
     padding: 1rem;
   }
 }
@@ -66,13 +71,13 @@
 .film {
   position: relative;
   overflow: hidden;
-  border-radius: 30px;
+
   background-color: aquamarine;
   width: 200 * 0.9px;
   height: 300 * 0.9px;
   outline: 5px rgba(255, 255, 255, 0) solid;
   &:hover {
-    outline: 3px white solid;
+    outline: 2px white solid;
     transition: all 200ms;
   }
 }

@@ -111,12 +111,8 @@ function ProfilePage({ data, children }) {
 function Blank() {
   return (
     <>
-      <section>
-        <Link href="/user/login">
-          <button className="profile-logout profile-redirect">
-            Login or create an account now
-          </button>
-        </Link>
+      <section className="profile-redirect">
+        <Link href="/user/login">Login or create an account now</Link>
       </section>
     </>
   );

@@ -2,10 +2,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
+import slugify from "slugify";
 //ICON/////
 import { FaPlay } from "react-icons/fa";
-import { BsBookmark } from "react-icons/bs";
-
+import { MdWorkspacePremium } from "react-icons/md";
+import { BsArrowUpRightSquareFill } from "react-icons/bs";
 import { HiOutlinePlay } from "react-icons/hi2";
 import JsCheck from "@/app/global-components/JsCheck";
 import checkLogin from "@/app/global-utils/checkLogin";
@@ -45,48 +46,47 @@ function easeInOutCubic(t, b, c, d) {
   t -= 2;
   return (c / 2) * (t * t * t + 2) + b;
 }
-function PreviewDescription({ title, date, genres }) {
-  const year = new Date(date).getFullYear();
-
+function UserSection({ status }) {
   return (
     <>
-      <h1 className="home-main-title">
-        {/* <div className="home-feature-title">
-          <div className="style-block" />
-          <span style={{ color: "#44C1D3" }}>
-            Cinemania <span style={{ color: "white" }}>recommend</span>
-          </span>{" "}
-        </div> */}
-        Lorem ipsum dolor sit amet
-        {/* <div className="home-line"></div> */}
-        <hr style={{ marginTop: "1.2rem" }} />
-        <div className="preview-date">
-          {year} |{" "}
-          <span style={{ color: "#44C1D3", opacity: "0.9" }}>Romance</span>
-        </div>
-        <div className="useFont home-description">
-          In a post-apocalyptic world, a group of survivors embarks on a daring
-          mission to find a mythical paradise believed to hold the key to
-          humanity's salvation.
-        </div>
-      </h1>
-      {/* <section className="description-wrapper">
-        <div className="preview-tag-wrapper">
-          {genres.map((el) => (
-            <div key={el} className="preview-tag">
-              {el}
+      <section className="useFont home-intro">
+        {status.status !== "pending" &&
+          (!status.username ? (
+            // DISPLAY LOGIN SECTION IF NOT LOGGED IN
+
+            <div className="home-login-section">
+              <div>Đăng nhập để lưu phim, bình luận,..</div>
+              <Link href="/user/login">Đăng nhập</Link>
             </div>
+          ) : (
+            //DISPLAY WELCOME SECTION AND LINK TO LIST IF LOGGED IN
+
+            <>
+              <div className="home-welcome">
+                <div className="home-ava">
+                  <Image alt="User avata" fill src="/ava-demo.jpg" />
+                </div>
+                <div>
+                  Chào bạn,
+                  <span className="username"> {status.username}</span>
+                </div>
+              </div>
+              <Link href="/profile/save" className="home-toList">
+                Phim đã lưu <BsArrowUpRightSquareFill />
+              </Link>
+            </>
           ))}
-        </div>
-      </section> */}
+      </section>
     </>
   );
 }
-
 export default function SpotlightSection({ filmList }) {
   const userName = useRef();
   const [select, setSelect] = useState(0);
-  const [welcomeText, setWelcomeText] = useState(null);
+  const [welcomeText, setWelcomeText] = useState({
+    status: "pending",
+    username: null,
+  });
   const [autoSlider, setAutoSlider] = useState(true);
   const slider = useRef();
   const sliderContainer = useRef();
@@ -95,12 +95,13 @@ export default function SpotlightSection({ filmList }) {
     async function checkUser() {
       const user = await checkLogin();
 
-      if (user.status === "fail") setWelcomeText("none");
-      else setWelcomeText(user.data.name);
+      if (user.status === "fail")
+        setWelcomeText({ status: "success", username: null });
+      else setWelcomeText({ status: "success", username: user.data.name });
     }
     checkUser();
   }, []);
-  ///SCROLLER//
+  ///--FILM LIST SWIPER--////////////////////////////////////////////////////////////////
   const mouseMoveHandler = function (e) {
     // if (!dragging) return;
     sliderContainer.current.style.pointerEvents = "none";
@@ -141,11 +142,9 @@ export default function SpotlightSection({ filmList }) {
   }, []);
   //--Change the slide show every 3 second
   useEffect(() => {
-    console.log(autoSlider);
     if (autoSlider) {
       let currentSelect = select;
       const autoSlide = setInterval(() => {
-        console.log(currentSelect);
         if (currentSelect === 5) {
           setSelect(0);
           currentSelect = 0;
@@ -164,65 +163,67 @@ export default function SpotlightSection({ filmList }) {
       return () => clearInterval(autoSlide);
     }
   }, [autoSlider]);
+
+  //////////////////////////////////////////////////////////////////////////////////////////
+  function PreviewDescription({ title, date, genres }) {
+    const year = new Date(date).getFullYear();
+
+    return (
+      <section className="home-preview-description">
+        <button className="home-play-button">
+          <Link
+            style={{
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              top: "0%",
+              left: "0%",
+            }}
+            href={`/title/${slugify(title, { lower: true })}`}
+          ></Link>
+          <FaPlay
+            style={{
+              width: "1.5rem",
+              height: "1.5rem",
+              color: "var(--green-pallete)",
+            }}
+          />
+        </button>
+        <h1 className="home-main-title">
+          {title}
+          <div className="preview-date">
+            {year} |{" "}
+            <span style={{ color: "#44C1D3", opacity: "0.9" }}>Romance</span>
+          </div>
+        </h1>
+      </section>
+    );
+  }
+
   return (
     <>
       {/* <JsCheck /> */}
-      <section className="useFont home-intro">
-        {welcomeText &&
-          (welcomeText !== "none" ? (
-            <span
-              ref={userName}
-              className="welcome-text"
-              style={{ fontSize: "1.1rem", color: "white" }}
-            >
-              Welcome back,{" "}
-              <strong style={{ fontSize: "1.3rem", color: "#01c38d" }}>
-                {welcomeText}
-              </strong>
-              🌳
-            </span>
-          ) : (
-            <span
-              ref={userName}
-              className="welcome-text"
-              style={{
-                fontSize: "1.3rem",
-                color: "#01c38d",
-                cursor: "pointer",
-              }}
-            >
-              <ins onClick={() => (window.location.href = "/user/login")}>
-                Login
-              </ins>{" "}
-              or{" "}
-              <ins onClick={() => (window.location.href = "/user/signup")}>
-                Sign up
-              </ins>
-            </span>
-          ))}
-      </section>
 
       <section className="spotlight-wrapper">
+        {/* ----------HOME-INTRO------------- */}
+
+        <UserSection status={welcomeText} />
+
         {/*---------IMAGE SLIDER--------- */}
-        <div className="preview-button">
-          <Link
-            className="home-play-button"
-            href={`/title/${filmList[select].id}`}
-          >
-            <FaPlay className="home-play-icon" />
-            {/* Watch */}
-          </Link>
-        </div>
+        <section className="home-title">
+          Phim nổi bật
+          <div className="style-underline"></div>
+        </section>
 
         <PreviewDescription
           title={filmList[select].name}
-          date={filmList[select].date}
+          date={filmList[select].year}
           genres={filmList[select].genres}
         />
 
         <div className="main-preview">
           <section
-            style={{ transform: `translateY(${-20 * select}%)` }}
+            style={{ transform: `translateX(${-20 * select}%)` }}
             className="image-slider"
           >
             {filmList.slice(0, 5).map((film, index) => (
@@ -240,6 +241,7 @@ export default function SpotlightSection({ filmList }) {
 
             <div className="loading-state"></div>
           </section>
+
           {/**------------------------------ */}
         </div>
         {/*Right Panel */}
@@ -282,6 +284,13 @@ export default function SpotlightSection({ filmList }) {
           {/** ---------------------*/}
         </div>
       </section>
+      <div className="home-premium">
+        <div>
+          Xem phim không quảng cáo với premium
+          <MdWorkspacePremium style={{ width: "1.5rem", height: "1.5rem" }} />
+        </div>
+        <Link href="/premium">Tìm hiểu</Link>
+      </div>
     </>
   );
 }

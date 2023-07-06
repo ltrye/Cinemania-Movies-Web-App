@@ -1,3 +1,31 @@
+.search-box {
+  // border: 1px var(--green-pallete) solid;
+
+  z-index: 99999999999999;
+  backdrop-filter: blur(10px);
+  position: fixed;
+  background-color: #000000d3;
+  backdrop-filter: blur(10px);
+  width: 20rem;
+  height: calc(100vh - 3.4rem);
+  right: 0%;
+  top: 3.4rem;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  animation: slide cubic-bezier(0.22, 1, 0.36, 1) 300ms;
+  box-shadow: rgba(0, 0, 0, 0.35) -3px 5px 15px;
+  &.search-close {
+    animation: reverse-slide 300ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    // transform: translateX(0%);
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(240, 248, 255, 0.395);
+  }
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+
 .search-result-container {
   position: relative;
   margin-top: 20px;
@@ -5,17 +33,68 @@
   display: flex;
   flex-direction: column;
 }
+.search-input-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100rem;
+  height: 3rem;
+  & :nth-child(1) {
+    position: relative;
+    background-color: rgba(45, 45, 45, 0.742);
+    width: 3.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(72, 72, 72, 0.742);
+    }
+
+    & :first-child {
+      background-color: rgba(0, 255, 255, 0);
+      transition: transform 100ms;
+      color: white;
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+  }
+  & :nth-child(2) {
+    width: inherit;
+    outline: none;
+    border: none;
+    padding-left: 1rem;
+    font-size: 1rem;
+    background-color: rgba(45, 45, 45, 0.742);
+    color: white;
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.606);
+    }
+  }
+}
 
 .search-element {
   position: relative;
   width: 100%;
   height: 7rem;
-
+  cursor: pointer;
   display: flex;
   flex-direction: row;
   gap: 20px;
+  transition: all 200ms;
+  animation: searchSuccess 200ms forwards;
+  &:hover {
+    background-color: rgb(55, 55, 55);
+  }
 }
-
+@keyframes searchSuccess {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .search-image {
   position: relative;
   height: 100%;

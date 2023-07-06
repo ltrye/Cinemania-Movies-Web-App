@@ -5,12 +5,12 @@ import Image from "next/image";
 import "./style/SearchBox.scss";
 
 function SearchEl(el) {
-  const year = new Date(el.el.date).getFullYear();
+  const year = new Date(el.el.year).getFullYear();
   return (
     <>
       <div className="search-element">
         <div className="search-image">
-          <Image fill />
+          <Image fill src={`https://picsum.photos/400/800?random=${1}`} />
         </div>
         <span className="search-description">
           {el.el.name}
@@ -28,6 +28,7 @@ export default function SearchBox({}) {
   const [searchList, setSearchList] = useState([]);
 
   const searchBox = useRef();
+  const searchInput = useRef();
   const [searchOption, setSearchOption] = useState({
     style: null,
     mount: false,
@@ -66,16 +67,39 @@ export default function SearchBox({}) {
           >
             <form
               onSubmit={async (e) => {
-                const searchRes = await requestSearch(e);
+                e.preventDefault();
+                if (!searchInput.current.value) return;
+                const searchRes = await requestSearch(searchInput.current);
+                console.log(searchRes);
+                if (searchRes.result === 0) return setSearchList(null);
                 setSearchList(searchRes.data);
               }}
             >
-              <input placeholder="DITMEHOGMINH" className="nav-input"></input>
+              <div className="search-input-container">
+                <div
+                  onClick={async () => {
+                    if (!searchInput.current.value) return;
+                    const searchRes = await requestSearch(searchInput.current);
+                    if (!searchRes.data) return setSearchList(null);
+                    else setSearchList(searchRes.data);
+                  }}
+                >
+                  <AiOutlineSearch />
+                </div>
+                <input ref={searchInput} placeholder="Tìm kiếm phim"></input>
+              </div>
             </form>
+
             <div className="search-result-container">
-              {searchList.map((el, index) => {
-                return <SearchEl el={el} />;
-              })}
+              {!searchList && (
+                <div style={{ color: "white", marginLeft: "1rem" }}>
+                  Khong co ket qua
+                </div>
+              )}
+              {searchList &&
+                searchList.map((el, index) => {
+                  return <SearchEl el={el} />;
+                })}
             </div>
           </section>
         )}
