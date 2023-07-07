@@ -1,7 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Roboto:wght@300&display=swap");
+
 .login-background {
-  padding: 2rem 0;
-  height: 38rem;
-  width: inherit;
+  position: absolute;
+  top: 0%;
+  left: 0;
+  width: 100%;
+  padding: 6rem 0;
+  height: 41.5rem;
+
   background-image: url("/loginbg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
