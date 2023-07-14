@@ -60,13 +60,13 @@ export default function NavigationBar() {
             href="/series"
             className={`nav-item ${path === "/series" && "active"}`}
           >
-            Phim lẻ
+            Phim bộ
           </Link>
           <Link
             href="/movies"
             className={`nav-item ${path === "/movies" && "active"}`}
           >
-            Phim bộ
+            Phim lẻ
           </Link>
           <div
             onClick={(e) => {
