@@ -60,8 +60,8 @@ export default function NavigationBar() {
             href="/series"
             className={`nav-item ${path === "/series" && "active"}`}
           >
-            Phim lẻ
-          </Link>
+            Phim bộ
+          </Link> */}
           <Link
             href="/movies"
             className={`nav-item ${path === "/movies" && "active"}`}
