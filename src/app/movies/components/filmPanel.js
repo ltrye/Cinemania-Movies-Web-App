@@ -1,10 +1,26 @@
 import Image from "next/image";
+import Link from "next/link";
 import { AiFillCaretDown } from "react-icons/ai";
-export default function FilmPanel() {
+
+function Film({ name, slug }) {
+  return (
+    <article className="film-el">
+      <Link prefetch={false} href={`/title/${slug}`}>
+        <div className="film-panel-image">
+          <Image fill src="/poster-demo.jpg" />
+        </div>
+
+        <div>{name}</div>
+      </Link>
+    </article>
+  );
+}
+
+export default function FilmPanel({ pageNumber, filmList }) {
   return (
     <>
       <div className="series-section-title">
-        Series
+        {"Series - " + "page " + pageNumber}
         <hr style={{ margin: "1rem 0" }} />
       </div>
 
@@ -38,17 +54,28 @@ export default function FilmPanel() {
             <span className="order-option">Cao den thap</span>
           </div>
           <section className="all-film-container">
-            {[...Array(15)].map((el, index) => {
+            {filmList.map((el, index) => {
               return (
                 <>
-                  <div className="film-panel-image">
-                    <Image fill src="/poster-demo.jpg" />
-                  </div>
+                  <Film name={el.name} slug={el.slug} />
                 </>
               );
             })}
           </section>
-          <div className="all-film-paging"></div>
+          <div className="all-film-paging">
+            {[...Array(3)].map((el, index) => {
+              return (
+                <Link
+                  href={`/movies/${index === 0 ? "" : `page/${index + 1}`}`}
+                  style={{
+                    backgroundColor: `${
+                      index === pageNumber - 1 && "var(--green-pallete)"
+                    }`,
+                  }}
+                ></Link>
+              );
+            })}
+          </div>
         </section>
         {/* //--BANG XEP HANG--// */}
         <section className="ranking">

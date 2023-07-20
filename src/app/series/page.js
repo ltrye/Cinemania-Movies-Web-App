@@ -4,11 +4,5 @@ import TrendSlider from "./components/trendSlider";
 import "./style/page.scss";
 
 export default function Series() {
-  return (
-    <div>
-      {/* <FilmSection /> */}
-      <TrendSlider />
-      <FilmPanel />
-    </div>
-  );
+  return <div className="notify">COMING SOON!</div>;
 }
