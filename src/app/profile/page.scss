@@ -258,3 +258,31 @@
     opacity: 0.5;
   }
 }
+
+@media screen and (max-width: 1000px) {
+  .profile-grid-container {
+    grid: auto auto auto / auto;
+    column-gap: 10px;
+    gap: 5rem;
+  }
+  .profile-save-container {
+    grid-row: 2;
+    grid-column: 1;
+    height: 20rem;
+  }
+  .profile-navigation {
+    grid-row: 3;
+    grid-column: 1;
+  }
+  .profile-line {
+    display: none;
+  }
+  .profile-info-card {
+    grid-row: 2;
+    grid-column: 1;
+  }
+  .profile-picture {
+    grid-row: 1;
+    grid-column: 1;
+  }
+}

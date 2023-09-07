@@ -53,7 +53,7 @@ async function ReAuth(e, setLoad, setStatus) {
   setLoad(true);
   try {
     const req = await fetch(
-      "https://movieflix-production.up.railway.app/api/v1/user/forgotPassword",
+      "https:///movieflix-ljqx.onrender.com/api/v1/user/forgotPassword",
       {
         headers: {
           "Content-Type": "application/json",

@@ -67,7 +67,7 @@ async function Signing(e, setLoad, setStatus, setOption) {
   setLoad(true);
   try {
     const req = await fetch(
-      "https://movieflix-production.up.railway.app/api/v1/user/signup",
+      "https:///movieflix-ljqx.onrender.com/api/v1/user/signup",
       {
         headers: {
           "Content-Type": "application/json",

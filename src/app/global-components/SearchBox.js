@@ -2,24 +2,29 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { useEffect, useRef, useState } from "react";
 import requestSearch from "../global-utils/requestSearch";
 import Image from "next/image";
+import Link from "next/link";
 import "./style/SearchBox.scss";
+import slugify from "slugify";
 
 function SearchEl(el) {
   const year = new Date(el.el.year).getFullYear();
   return (
     <>
-      <div className="search-element">
+      <Link
+        href={`/title/${slugify(el.el.name, { lower: true })}`}
+        className="search-element"
+      >
         <div className="search-image">
           <Image fill src={`https://picsum.photos/400/800?random=${1}`} />
         </div>
         <span className="search-description">
           {el.el.name}
-          <br />{" "}
+          <br />
           <span className="useFont" style={{ color: "#01c38d" }}>
             {year}
           </span>
         </span>
-      </div>
+      </Link>
     </>
   );
 }

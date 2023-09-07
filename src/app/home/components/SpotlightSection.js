@@ -64,7 +64,7 @@ function UserSection({ status }) {
             <>
               <div className="home-welcome">
                 <div className="home-ava">
-                  <Image alt="User avata" fill src="/ava-demo.jpg" />
+                  <Image alt="User avata" fill src="/demo-image.jpg" />
                 </div>
                 <div>
                   Chào bạn,

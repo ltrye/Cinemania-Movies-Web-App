@@ -16,16 +16,16 @@ export default function Premium() {
           GOI PREMIUM CINEMANIA 1 THANG
           <div className="product-info">
             Chi tiet: <br />
-            - Khong quang cao
+            - Chat luong hon netflix
             <br />
-            - Free hong ming <br />
-            - Bao hanh tron doi <br />
-            <span className="product-price"> 10.000 vnd / thang</span>
+            - Khong gioi han luu phim <br />
+            - Bao hanh den chet <br />
+            <span className="product-price"> 10.000$ / day</span>
           </div>
           <PayButton />
         </section>
         <div className="product-image">
-          <Image priority alt="product" src="/ava-demo.jpg" fill />
+          <Image priority alt="product" src="/loginbg.jpg" fill />
         </div>
       </section>
     </>

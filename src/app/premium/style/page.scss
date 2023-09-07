@@ -15,11 +15,11 @@
   position: relative;
   height: 100%;
   width: 40rem;
-  border-radius: 0 10px 10px 0;
+
   overflow: hidden;
 }
 .product-bg {
-  border-radius: 10px 0 0 10px;
+  // border-radius: 10px 0 0 10px;
   position: absolute;
   z-index: -1;
   opacity: 0.4;
@@ -47,19 +47,53 @@
   font-size: 1.2rem;
   outline: none;
   background-color: var(--green-pallete);
-  border: 2px rgb(255, 255, 255) solid;
+  z-index: 20;
+  // border: 2px rgb(255, 255, 255) solid;
   width: 15rem;
   height: 3rem;
-  border-radius: 10px;
+  cursor: pointer;
+  // border-radius: 10px;
   transition: all 200ms;
-  &:hover {
-    transform: scale(1.05);
+
+  &:hover::before {
+    animation: swipe 300ms ease-in-out forwards;
   }
-  &:active {
-    transform: scale(0.95);
+  &::before {
+    animation: swipe-reserve 300ms ease-in-out forwards;
+    transform-origin: left;
+    position: absolute;
+    content: " ";
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    left: 0%;
+    top: 0%;
+    bottom: 0%;
+    right: 0%;
+    background-color: rgb(233, 233, 233);
+    // animation: swipe 400ms ease-out;
+    opacity: 0.4;
+    transition: all 200ms ease-in-out;
   }
 }
-
+@keyframes swipe {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes swipe-reserve {
+  from {
+    transform-origin: right;
+    transform: scaleX(1);
+  }
+  to {
+    transform-origin: right;
+    transform: scaleX(0);
+  }
+}
 .product-info {
   margin-top: 2rem;
   color: white;

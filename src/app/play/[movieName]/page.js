@@ -28,7 +28,8 @@ export default async function Page({ params }) {
     ],
     sources: [
       {
-        src: "https://movieflix-production.up.railway.app/api/v1/video/646c2e831bb1f740d0421e45",
+        src: "https://movieflix-ljqx.onrender.com/api/v1/video/647d6f5330afd6685841d955",
+        // src: "https://onedrive.live.com/?cid=6E97BF06485D6B01&id=6E97BF06485D6B01%2155040&parId=root&o=OneUp",
         type: "video/mp4",
       },
     ],
@@ -44,7 +45,7 @@ export default async function Page({ params }) {
 
 async function getMovie(id) {
   const movieData = await fetch(
-    `https://movieflix-production.up.railway.app/api/v1/film/${id}`,
+    `https://movieflix-ljqx.onrender.com/api/v1/film/${id}`,
     {
       method: "GET",
     }

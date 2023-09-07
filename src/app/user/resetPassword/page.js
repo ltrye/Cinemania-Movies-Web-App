@@ -65,7 +65,7 @@ async function updatePassword(e, setLoad, setStatus, token) {
   setLoad(true);
   try {
     const req = await fetch(
-      `https://movieflix-production.up.railway.app/resetPassword/${token}`,
+      `https:///movieflix-ljqx.onrender.com/resetPassword/${token}`,
       {
         headers: {
           "Content-Type": "application/json",

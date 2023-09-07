@@ -13,7 +13,7 @@ async function logout() {
   // console.log(document.cookie);
   else {
     const res = await fetch(
-      "https://movieflix-production.up.railway.app/api/v1/user/logout",
+      "https:///movieflix-ljqx.onrender.com/api/v1/user/logout",
       {
         method: "GET",
         credentials: "include",

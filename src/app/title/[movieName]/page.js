@@ -57,7 +57,7 @@ export default async function Page({ params }) {
 async function getMovie(id) {
   //--Revalidate in production mode//
   const res = await fetch(
-    `https://movieflix-production.up.railway.app/api/v1/film/${id}`,
+    `https://movieflix-ljqx.onrender.com/api/v1/film/${id}`,
     { next: { revalidate: 10 } }
   );
   if (!res.ok) {
