@@ -85,7 +85,7 @@ async function Signing(e, setLoad, setStatus, setOption) {
     if (loginStatus.status === "success") {
       setStatus({ status: "success", message: "Sign up successfully!😎" });
 
-      window.location.href = "/profile";
+      window.location.href = "/user/login";
     } else {
       //--IF LOGIN FAIL--------//
       setStatus({ status: "fail", message: loginStatus.message });
