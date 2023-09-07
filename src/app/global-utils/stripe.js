@@ -19,7 +19,7 @@ const pay = async (productId) => {
   try {
     //--Get checkout session from API--//
     let session = await fetch(
-      `https://movieflix-production.up.railway.app/api/v1/payment/checkout-session/${productId}`,
+      `https://movieflix-ljqx.onrender.com/api/v1/payment/checkout-session/${productId}`,
       {
         headers:
           process.env.NODE_ENV === "development"
