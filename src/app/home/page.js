@@ -1,6 +1,7 @@
 import "./style/page.scss";
 import Image from "next/image";
 import { BsChevronDoubleDown } from "react-icons/bs";
+
 //COMPONENTS/////////////
 
 import FilmSection from "../global-components/FilmSection";

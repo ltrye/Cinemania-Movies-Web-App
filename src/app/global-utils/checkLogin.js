@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 export default async function checkLogin() {
   try {
     const res = await fetch(
-      "https://movieflix-ljqx.onrender.com/api/v1/user/me",
+      `${process.env.BACKEND}me`,
       {
         headers:
           process.env.NODE_ENV === "development"

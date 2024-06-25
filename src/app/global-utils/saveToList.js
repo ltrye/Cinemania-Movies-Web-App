@@ -9,7 +9,7 @@ export default async function saveTolist(filmId) {
     const saveReq = JSON.stringify(selectedFilm);
     console.log(JSON.stringify(selectedFilm));
     const savePromise = await fetch(
-      `https://movieflix-ljqx.onrender.com/api/v1/save/mySave`,
+      `${process.env.BACKEND}save/mySave`,
       {
         headers:
           process.env.NODE_ENV === "development"

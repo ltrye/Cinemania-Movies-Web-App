@@ -90,6 +90,8 @@ export default function SpotlightSection({ filmList }) {
   const [autoSlider, setAutoSlider] = useState(true);
   const slider = useRef();
   const sliderContainer = useRef();
+
+  console.log(process.env.NODE_ENV);
   //--CHECK IF CLIENT IS LOGGED IN, SET WELCOME TEXT--//
   useEffect(() => {
     async function checkUser() {

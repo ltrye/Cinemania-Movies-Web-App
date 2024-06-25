@@ -71,7 +71,7 @@ function ProfilePage({ data, children }) {
 
           <div className="profile-line" />
           <div className="profile-picture">
-            <Image alt="profile-picture" src={"/" + data.photo} fill />
+            <Image alt="profile-picture" src={"/demo-image.jpg"} fill />
           </div>
           <ul className="profile-navigation">
             <Link href="/profile">
