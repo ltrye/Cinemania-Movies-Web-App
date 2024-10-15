@@ -1,4 +1,10 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is my first web project, make with Nextjs. The server is in seperate repo, use expressjs. Nextjs is used to serve frontend only.
+My main purpose of creating this project is to learn more about reactjs and client-side rendering in general.
+I have stopped maintaining this project since a years ago.
+
+
+
+[Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
