@@ -1,16 +1,16 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import slugify from "slugify";
 //ICON/////
 import { FaPlay } from "react-icons/fa";
 import { MdWorkspacePremium } from "react-icons/md";
 import { BsArrowUpRightSquareFill } from "react-icons/bs";
-import { HiOutlinePlay } from "react-icons/hi2";
-import JsCheck from "@/app/global-components/JsCheck";
-import checkLogin from "@/app/global-utils/checkLogin";
-import saveTolist from "@/app/global-utils/saveToList";
+
+import getUserInfo from "@/api/checkLogin";
+import { UserContext } from "@/context/UserContext";
+
 
 let pos = { x: 0, y: 0 };
 let dragging = true;
@@ -46,12 +46,12 @@ function easeInOutCubic(t, b, c, d) {
   t -= 2;
   return (c / 2) * (t * t * t + 2) + b;
 }
-function UserSection({ status }) {
+function UserSection({ status, user }) {
   return (
     <>
       <section className="useFont home-intro">
         {status.status !== "pending" &&
-          (!status.username ? (
+          (!user? (
             // DISPLAY LOGIN SECTION IF NOT LOGGED IN
 
             <div className="home-login-section">
@@ -68,7 +68,7 @@ function UserSection({ status }) {
                 </div>
                 <div>
                   Chào bạn,
-                  <span className="username"> {status.username}</span>
+                  <span className="username"> {user.username}</span>
                 </div>
               </div>
               <Link href="/profile/save" className="home-toList">
@@ -87,15 +87,15 @@ export default function SpotlightSection({ filmList }) {
     status: "pending",
     username: null,
   });
+  const {user , loading} = useContext(UserContext);
   const [autoSlider, setAutoSlider] = useState(true);
   const slider = useRef();
   const sliderContainer = useRef();
 
-  console.log(process.env.NODE_ENV);
   //--CHECK IF CLIENT IS LOGGED IN, SET WELCOME TEXT--//
   useEffect(() => {
     async function checkUser() {
-      const user = await checkLogin();
+      const user = await getUserInfo();
 
       if (user.status === "fail")
         setWelcomeText({ status: "success", username: null });
@@ -209,7 +209,7 @@ export default function SpotlightSection({ filmList }) {
       <section className="spotlight-wrapper">
         {/* ----------HOME-INTRO------------- */}
 
-        <UserSection status={welcomeText} />
+        <UserSection status={welcomeText} user={user} />
 
         {/*---------IMAGE SLIDER--------- */}
         <section className="home-title">

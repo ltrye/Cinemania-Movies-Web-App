@@ -1,4 +1,5 @@
-import getFilmList from "@/app/global-utils/GetFilm";
+
+import { getFilmList } from "@/api/GetFilm";
 import FilmPanel from "../../components/filmPanel";
 
 export default async function Page({ params }) {

@@ -7,10 +7,10 @@ import { BsChevronDoubleDown } from "react-icons/bs";
 import FilmSection from "../global-components/FilmSection";
 import SpotlightSection from "./components/SpotlightSection";
 import Premium from "./components/Premium";
-import checkLogin from "../global-utils/checkLogin";
+import getUserInfo from "../../api/checkLogin";
 import SwipeableSlider from "../global-components/slider";
 import MySwiper from "../global-components/slider";
-import getFilmList from "../global-utils/GetFilm";
+import {getFilmList} from "../../api/GetFilm";
 
 export default async function Page() {
   const filmFetchList = await getFilmList();
@@ -18,11 +18,6 @@ export default async function Page() {
   return (
     <>
       <SpotlightSection filmList={filmFetchList.data} />
-      {/* <div className="home-explore">
-        <span className="explore">Explore</span>
-        <BsChevronDoubleDown className="arrow-down-icon" />
-      </div> */}
-
       <FilmSection filmList={filmFetchList.data} />
       <FilmSection filmList={filmFetchList.data} />
       <FilmSection filmList={filmFetchList.data} />
@@ -30,10 +25,3 @@ export default async function Page() {
   );
 }
 
-// async function getFilmList() {
-//   const movieList = await fetch(
-//     `https://movieflix-production.up.railway.app/api/v1/film`,
-//     { next: { revalidate: 5 } }
-//   );
-//   return movieList.json();
-// }

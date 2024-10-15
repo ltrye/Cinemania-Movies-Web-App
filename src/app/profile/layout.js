@@ -4,62 +4,29 @@ import Image from "next/image";
 import Link from "next/link";
 import "./page.scss";
 import { useEffect, useState } from "react";
-import checkLogin from "../global-utils/checkLogin";
+import getUserInfo from "../../api/checkLogin";
 import { usePathname } from "next/navigation";
 import ProfileCard from "./components/ProfileCard";
-
-async function logout() {
-  if (process.env.NODE_ENV === "development") Cookies.remove("jwt");
-  // console.log(document.cookie);
-  else {
-    const res = await fetch(
-      "https:///movieflix-ljqx.onrender.com/api/v1/user/logout",
-      {
-        method: "GET",
-        credentials: "include",
-        mode: "cors",
-      }
-    );
-  }
-  window.location.href = "/user/login";
-}
+import { useUserData } from "@/hook/useUserData";
+import { logOut } from "@/api/UserAPI";
+import LoadScreen from "../global-components/LoadScreen";
 
 export default function Layout({ children }) {
   const [isLogged, setIsLogged] = useState({ status: undefined });
-  useEffect(() => {
-    //--FETCH USER DATA IF JWT VALID--//
-    async function checkUserExist() {
-      if (process.env.NODE_ENV === "development" && !Cookies.get("jwt"))
-        return setIsLogged({ status: "fail" });
-      const currentUser = await checkLogin();
-      console.log(currentUser);
-      if (currentUser.status === "fail") setIsLogged({ status: "fail" });
-      else if (currentUser.status === "success")
-        setIsLogged({
-          status: "success",
-          id: currentUser.data._id,
-          name: currentUser.data.name,
-          photo: currentUser.data.photo,
-          email: currentUser.data.email,
-          premium: currentUser.data.premium,
-          premiumExpires: currentUser.data.premium
-            ? currentUser.data.premiumExpires
-            : null,
-        });
-    }
-    checkUserExist();
-  }, []);
+  const { userData, loading } = useUserData();
+
   return (
     <>
-      {isLogged.status === "success" && (
-        <ProfilePage children={children} data={isLogged} />
+      {userData && (
+        <ProfilePage children={children} data={isLogged} user={userData} />
       )}
-      {isLogged.status === "fail" && <Blank />}
+      {!userData && !loading && <Blank />}
+      {loading && <LoadScreen />}
     </>
   );
 }
 
-function ProfilePage({ data, children }) {
+function ProfilePage({ data, children, user }) {
   const path = usePathname();
 
   return (
@@ -91,14 +58,14 @@ function ProfilePage({ data, children }) {
               </button>
             </Link>
             <Link
-              style={data.premium ? { pointerEvents: "none" } : {}}
+              style={user.premium ? { pointerEvents: "none" } : {}}
               href="/premium"
             >
-              <div className={`profile-button ${data.premium && "gold"}`}>
-                {data.premium ? "Premium account" : "Upgrade to premium"}
+              <div className={`profile-button ${user.premium && "gold"}`}>
+                {user.premium ? "Premium account" : "Upgrade to premium"}
               </div>
             </Link>
-            <button onClick={logout} className="profile-button">
+            <button onClick={logOut} className="profile-button">
               Log out
             </button>
           </ul>

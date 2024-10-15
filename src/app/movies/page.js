@@ -1,5 +1,6 @@
+import { getFilmList } from "@/api/GetFilm";
 import FilmSection from "../global-components/FilmSection";
-import getFilmList from "../global-utils/GetFilm";
+
 import FilmPanel from "./components/filmPanel";
 // import TrendSlider from "./components/trendSlider";
 import "./style/page.scss";

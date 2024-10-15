@@ -1,6 +1,6 @@
 import { AiOutlineSearch } from "react-icons/ai";
 import { useEffect, useRef, useState } from "react";
-import requestSearch from "../global-utils/requestSearch";
+import requestSearch from "../../api/requestSearch";
 import Image from "next/image";
 import Link from "next/link";
 import "./style/SearchBox.scss";

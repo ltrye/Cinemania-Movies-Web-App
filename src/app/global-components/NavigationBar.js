@@ -2,13 +2,15 @@
 
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { AiOutlineSearch, AiFillCaretDown } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { TfiMenu } from "react-icons/tfi";
 import AltNavigationBar from "./AltNavigationBar";
 
 import SearchBox from "./SearchBox";
+import { UserContext } from "@/context/UserContext";
+import SkeletonLoader from "../profile/components/SkeletonLoader";
 function checkRoute(path) {
   if (path === "/" || !path) return "none";
   else {
@@ -35,6 +37,8 @@ function checkRoute(path) {
 
 //--NAV-BAR--//
 export default function NavigationBar() {
+  const { user, loading } = useContext(UserContext);
+
   const genreList = useRef();
   let check;
   const path = usePathname();
@@ -90,9 +94,21 @@ export default function NavigationBar() {
           <SearchBox />
         </div>
         <Link href="/profile">
-          <CgProfile
-            className={`profile-icon ${check === "profile" && "active"}`}
-          />
+          {loading && (
+            <div className="animate-pulse bg-slate-200 rounded-full size-8 min-w-8"></div>
+          )}
+          {user && !loading && (
+            <img
+              // src={user.photoURL}
+              src="/demo-image.jpg"
+              className={`rounded-full size-8 min-w-8`}
+            />
+          )}
+          {!user && !loading && (
+            <CgProfile
+              className={`profile-icon ${check === "profile" && "active"}`}
+            />
+          )}
         </Link>
       </section>
     </>

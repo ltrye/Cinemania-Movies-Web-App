@@ -5,13 +5,16 @@ import { FaPlay } from "react-icons/fa";
 import { BsBookmark } from "react-icons/bs";
 
 import Link from "next/link";
-import saveTolist, { SaveButton } from "@/app/global-utils/saveToList";
+import { saveTolist } from "@/api/saveToList";
 import CommentSection from "./components/Comment";
+import { getFilmById } from "@/api/GetFilm";
+import { SaveButton } from "./components/SaveButton";
 
 export default async function Page({ params }) {
-  const movieData = await getMovie(params.movieName);
-  const { data } = movieData;
-  const date = new Date(data.date).getFullYear();
+  const { data } = await getFilmById(params.movieName);
+
+  console.log(data);
+  const date = new Date(data.year).getFullYear();
 
   return (
     <>
@@ -45,23 +48,11 @@ export default async function Page({ params }) {
                 Watch now
               </button>
             </Link>
-            <SaveButton id={params.movieName} />
+            <SaveButton id={data._id} />
           </div>
           <CommentSection />
         </div>
       </section>
     </>
   );
-}
-
-async function getMovie(id) {
-  //--Revalidate in production mode//
-  const res = await fetch(
-    `https://movieflix-ljqx.onrender.com/api/v1/film/${id}`,
-    { next: { revalidate: 10 } }
-  );
-  if (!res.ok) {
-    throw new Error("Fail to fetch data");
-  }
-  return res.json();
 }

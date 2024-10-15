@@ -1,8 +1,10 @@
+import { BACKEND } from "@/constant/AppConstant";
+
 export default async function requestSearch(input) {
   const params = input.value;
 
   const searchRes = await fetch(
-    `${process.env.BACKEND}film/search?search=${params}`,
+    `${BACKEND}/film/search?search=${params}`,
     {
       method: "GET",
     }

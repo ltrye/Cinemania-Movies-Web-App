@@ -1,6 +1,6 @@
 import "./style/page.scss";
 import Image from "next/image";
-import PayButton from "@/app/global-utils/stripe";
+import PayButton from "@/api/stripe";
 export default function Premium() {
   return (
     <>

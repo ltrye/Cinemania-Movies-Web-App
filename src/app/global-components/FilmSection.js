@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useRef, useState } from "react";
 import slugify from "slugify";
+import { getRandomImageLink } from "@/utils/Utils";
 
 let pos = { x: 0, y: 0 };
 let dragging = false;
@@ -28,7 +29,7 @@ const mouseDownHandler = function (e, slider) {
     x: e.clientX,
     y: e.clientY,
   };
-  console.log(pos);
+ 
 };
 const mouseUpHandler = function (e, slider) {
   dragging = false;
@@ -36,7 +37,7 @@ const mouseUpHandler = function (e, slider) {
 };
 ///---------////////////////////////////////////
 export default function FilmSection({ filmList }) {
-  console.log(filmList);
+
   const slider = useRef();
   const [group, inView] = useInView({
     // triggerOnce: true,
@@ -69,7 +70,7 @@ export default function FilmSection({ filmList }) {
               <Image
                 alt="film"
                 className="film"
-                src={`https://picsum.photos/400/800?random=${index}`}
+                src={getRandomImageLink(400, 800)}
                 width={200 * 0.85}
                 height={300 * 0.85}
               />
