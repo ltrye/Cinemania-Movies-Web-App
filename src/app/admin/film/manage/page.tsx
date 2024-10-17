@@ -1,16 +1,17 @@
 "use client";
 
 import { getFilmList, getFilmListByPage } from "@/api/GetFilm";
+import LoadScreen from "@/app/global-components/LoadScreen";
 import { useRequestParams } from "@/hook/useRequestParams";
 import { getRandomImageLink } from "@/utils/Utils";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 const pageSize = 10;
 
-export default function Page() {
+function FilmList() {
   const params = useSearchParams();
 
   const page: number = parseInt(params.get("page")) || 1;
@@ -40,6 +41,14 @@ export default function Page() {
         })}
       </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<LoadScreen />}>
+      <FilmList />
+    </Suspense>
   );
 }
 
