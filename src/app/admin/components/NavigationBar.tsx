@@ -30,8 +30,8 @@ export function NavigationBar({
           <div className="md:flex md:items-center md:gap-12">
             <nav aria-label="Global" className="hidden md:block">
               <ul className="flex items-center gap-6 text-sm">
-                {navigationItems.map((item) => (
-                  <li>
+                {navigationItems.map((item, index) => (
+                  <li key={index}>
                     <a
                       className="text-gray-500 transition hover:text-gray-500/75"
                       href={item.url}

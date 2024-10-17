@@ -66,6 +66,7 @@ export default function FilmPanel({ pageNumber, filmList }) {
             {[...Array(3)].map((el, index) => {
               return (
                 <Link
+                  key={index}
                   href={`/movies/${index === 0 ? "" : `page/${index + 1}`}`}
                   style={{
                     backgroundColor: `${
