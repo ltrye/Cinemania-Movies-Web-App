@@ -8,6 +8,16 @@ export async function getFilmList(params = null) {
   return movieList.json();
 }
 
+export async function getFilmListByPage(page: number, limit: number) {
+  const res = await fetch(`${BACKEND}/film?page=${page}&limit=${limit}`, {
+    next: { revalidate: 10 },
+  });
+  if (!res.ok) {
+    throw new Error("Fail to fetch data");
+  }
+  return await res.json();
+}
+
 export async function getFilmById(id) {
   const res = await fetch(`${BACKEND}/film/${id}`, {
     next: { revalidate: 10 },
@@ -28,10 +38,31 @@ export async function getSpotlightFilm() {
   return await res.json();
 }
 
-
-export async function getTrendingFilm(){
+export async function getTrendingFilm() {
   const res = await fetch(`${BACKEND}/film?page=${1}&limit=${10}`, {
     next: { revalidate: 10 },
+  });
+  if (!res.ok) {
+    throw new Error("Fail to fetch data");
+  }
+  return await res.json();
+}
+
+export async function addFilm() {
+  const res = await fetch(`${BACKEND}/film`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: "New Film",
+      year: 2021,
+      genres: ["Action", "Adventure"],
+      description: "This is a new film",
+      rating: 5,
+      poster: "https://picsum.photos/200",
+      trailer: "https://www.youtube.com/watch?v=6ZfuNTqbHE8",
+    }),
   });
   if (!res.ok) {
     throw new Error("Fail to fetch data");

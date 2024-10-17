@@ -1,4 +1,3 @@
-
 import { getFilmList } from "@/api/GetFilm";
 import FilmPanel from "../../components/filmPanel";
 
