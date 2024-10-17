@@ -8,7 +8,7 @@ export default function Signup({ setOption }) {
 
   return (
     <>
-      <form onSubmit={(e) => Signing(e, setLoad, setStatus, setOption)}>
+      <form onSubmit={(e) => Signing(e, setLoad, setStatus)}>
         <span className="title login-title">SIGN UP</span>
         <section className="login-input-group">
           <input placeholder="Name" className="login-input username"></input>
@@ -52,7 +52,7 @@ export default function Signup({ setOption }) {
   );
 }
 
-async function Signing(e, setLoad, setStatus, setOption) {
+async function Signing(e, setLoad, setStatus) {
   e.preventDefault();
   setStatus({ status: null, message: null });
   //---USER INPUT----//
