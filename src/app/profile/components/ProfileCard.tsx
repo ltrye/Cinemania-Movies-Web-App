@@ -1,15 +1,15 @@
 import Link from "next/link";
-export default function ProfileCard({ data }) {
-  const expire = new Date(data.premiumExpires);
+export default function ProfileCard({ data: user }) {
+  const expire = new Date(user.premiumExpires);
   return (
     <>
       <div className="profile-info-card">
         <div className="profile-card-title">
           <div>
-            Cinemania - <span>{data.premium ? "Gold" : "Silver"}</span>
+            Cinemania - <span>{user.premium ? "Gold" : "Silver"}</span>
           </div>
           <span className="profile-premium-status">
-            {data.premium
+            {user.premium
               ? `Expire: ${
                   expire.getDay() +
                   "/" +
@@ -23,12 +23,12 @@ export default function ProfileCard({ data }) {
         <div className="profile-personal-info">
           <div>
             <span className="key">Name:</span>
-            <span className="data"> {data.name}</span>
+            <span className="data"> {user.name}</span>
           </div>
 
           <div>
             <span className="key">Email:</span>
-            <span className="data"> {data.email}</span>
+            <span className="data"> {user.email}</span>
           </div>
           <Link href="/user/resetPassword">
             <div className="profile-password">Change password</div>

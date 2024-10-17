@@ -17,3 +17,24 @@ export async function getFilmById(id) {
   }
   return await res.json();
 }
+
+export async function getSpotlightFilm() {
+  const res = await fetch(`${BACKEND}/film?page=${1}&limit=${5}`, {
+    next: { revalidate: 10 },
+  });
+  if (!res.ok) {
+    throw new Error("Fail to fetch data");
+  }
+  return await res.json();
+}
+
+
+export async function getTrendingFilm(){
+  const res = await fetch(`${BACKEND}/film?page=${1}&limit=${10}`, {
+    next: { revalidate: 10 },
+  });
+  if (!res.ok) {
+    throw new Error("Fail to fetch data");
+  }
+  return await res.json();
+}

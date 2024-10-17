@@ -1,10 +1,8 @@
-
-
 import "./globals.scss";
 import { Inter } from "next/font/google";
 import NavigationBar from "./global-components/NavigationBar";
 import { Roboto } from "next/font/google";
-import Footer from "./global-components/Footer";
+import { Footer } from "./global-components/Footer";
 import { UserProvider } from "@/context/UserContext";
 // import "@fontsource/roboto";
 
@@ -25,9 +23,8 @@ export default function RootLayout({ children }) {
       <body>
         <UserProvider>
           <NavigationBar />
-          {/* <section className="image-trace"></section> */}
           {children}
-          <Footer />
+          {/* <Footer /> */}
         </UserProvider>
       </body>
     </html>

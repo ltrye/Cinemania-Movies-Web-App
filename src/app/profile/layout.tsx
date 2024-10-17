@@ -18,7 +18,9 @@ export default function Layout({ children }) {
   return (
     <>
       {userData && (
-        <ProfilePage children={children} data={isLogged} user={userData} />
+        <ProfilePage data={isLogged} user={userData}>
+          {children}
+        </ProfilePage>
       )}
       {!userData && !loading && <Blank />}
       {loading && <LoadScreen />}
@@ -34,7 +36,7 @@ function ProfilePage({ data, children, user }) {
       <section className="profile-panel">
         <section className="profile-grid-container">
           {children}
-          {path === "/profile" && <ProfileCard data={data} />}
+          {path === "/profile" && <ProfileCard data={user} />}
 
           <div className="profile-line" />
           <div className="profile-picture">

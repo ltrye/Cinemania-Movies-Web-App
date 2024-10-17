@@ -15,7 +15,11 @@ function SearchEl(el) {
         className="search-element"
       >
         <div className="search-image">
-          <Image fill src={`https://picsum.photos/400/800?random=${1}`} />
+          <Image
+            alt="search image"
+            fill
+            src={`https://picsum.photos/400/800?random=${1}`}
+          />
         </div>
         <span className="search-description">
           {el.el.name}
@@ -49,8 +53,10 @@ export default function SearchBox({}) {
   }, [searchOption]);
 
   function transitionEndHandler() {
-    if (searchOption.mount && searchOption.style === "fade out")
+    if (searchOption.mount && searchOption.style === "fade out") {
       setSearchOption({ style: null, mount: false });
+      setSearchList([]);
+    }
   }
   return (
     <>
@@ -66,6 +72,7 @@ export default function SearchBox({}) {
         {searchOption.mount && (
           <section
             onAnimationEnd={transitionEndHandler}
+            onTransitionEnd={transitionEndHandler}
             className={`search-box ${
               searchOption.style === "fade out" && "search-close "
             }`}
@@ -103,7 +110,7 @@ export default function SearchBox({}) {
               )}
               {searchList &&
                 searchList.map((el, index) => {
-                  return <SearchEl el={el} />;
+                  return <SearchEl key={index} el={el} />;
                 })}
             </div>
           </section>
