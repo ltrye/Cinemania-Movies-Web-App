@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-export default function Signup({ setOption }) {
+export default function Signup() {
   const [isLoad, setLoad] = useState(false);
   const [status, setStatus] = useState({ status: null, message: null });
 

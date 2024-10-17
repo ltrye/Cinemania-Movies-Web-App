@@ -6,15 +6,15 @@ import { useState, useEffect } from "react";
 import { fetchSaveList } from "@/api/UserAPI";
 import Link from "next/link";
 import { getRandomImageLink } from "@/utils/Utils";
+import { Film } from "@/api/GetFilm";
 
 export default function SaveList() {
-  const [list, setList] = useState();
+  const [list, setList] = useState<Film[]>();
   useEffect(() => {
     async function getList() {
-      const res = await fetchSaveList();
-      if (res.status === "fail") return;
+      const res = (await fetchSaveList()).doc as Film[];
 
-      setList(res.doc.film);
+      setList(res);
     }
     getList();
   }, []);
@@ -29,7 +29,9 @@ export default function SaveList() {
                   <div className="save-image row-start-1 row-span-4 overflow-hidden">
                     <img src={getRandomImageLink(400, 800)} className="" />
                   </div>
-                  <div className="text-white h-full w-full text-center  bg-[#1A1C1C] flex justify-center items-center">{el.name}</div>
+                  <div className="text-white h-full w-full text-center  bg-[#1A1C1C] flex justify-center items-center">
+                    {el.name}
+                  </div>
                 </div>
               </Link>
             ))

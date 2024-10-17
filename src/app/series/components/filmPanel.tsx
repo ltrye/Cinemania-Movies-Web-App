@@ -30,7 +30,7 @@ export default function FilmPanel() {
               return (
                 <>
                   <div className="film-panel-image">
-                    <Image fill src="/poster-demo.jpg" />
+                    <Image alt="film poster" fill src="/poster-demo.jpg" />
                   </div>
                 </>
               );

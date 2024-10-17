@@ -1,5 +1,27 @@
 import { BACKEND } from "@/constant/AppConstant";
 
+export interface Film {
+  _id: string;
+  actors: string[];
+  uploadDate: string;
+  genres: string[];
+  ratingsAverage: number;
+  ratingsQuantity: number;
+  hot: boolean;
+  views: number;
+  name: string;
+  length: string;
+  year: string;
+  link: string;
+  description: string;
+  filmType: string;
+  director: string;
+  poster: string;
+  filmImage: string;
+  slug: string;
+  __v: number;
+}
+
 export async function getFilmList(params = null) {
   const movieList = await fetch(
     `${BACKEND}/film${params !== null ? "?" + params : " "}`,

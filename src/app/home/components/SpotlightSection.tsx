@@ -12,7 +12,14 @@ import getUserInfo from "@/api/checkLogin";
 import { UserContext } from "@/context/UserContext";
 import { easeInOutCubic } from "@/utils/Easing";
 
-let pos = { x: 0, y: 0 };
+interface ScrollPosition {
+  x: number;
+  y: number;
+  left?: number;
+  right?: number;
+}
+
+let pos: ScrollPosition = { x: 0, y: 0 };
 let dragging = false;
 
 function smoothScrollTo(element, to, duration) {

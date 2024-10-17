@@ -36,8 +36,8 @@ function SearchEl(el) {
 export default function SearchBox({}) {
   const [searchList, setSearchList] = useState([]);
 
-  const searchBox = useRef();
-  const searchInput = useRef();
+  const searchBox = useRef<HTMLDivElement>();
+  const searchInput = useRef<HTMLInputElement>();
   const [searchOption, setSearchOption] = useState({
     style: null,
     mount: false,
@@ -82,7 +82,6 @@ export default function SearchBox({}) {
                 e.preventDefault();
                 if (!searchInput.current.value) return;
                 const searchRes = await requestSearch(searchInput.current);
-                console.log(searchRes);
                 if (searchRes.result === 0) return setSearchList(null);
                 setSearchList(searchRes.data);
               }}

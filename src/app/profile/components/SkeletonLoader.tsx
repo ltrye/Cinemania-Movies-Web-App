@@ -1,7 +1,6 @@
 import Image from "next/image";
 
-export default function SkeletonLoader({ id }) {
-  console.log(id);
+export default function SkeletonLoader() {
   return (
     <>
       {[...Array(7)].map((el, index) => {

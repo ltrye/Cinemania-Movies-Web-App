@@ -20,7 +20,7 @@ export default function Result({ searchParams }) {
           </Link>
         </section>
         <section className="result-image">
-          <Image fill src="/ava-demo.jpg" />
+          <Image alt="avatar" fill src="/ava-demo.jpg" />
         </section>
       </section>
     );

@@ -8,7 +8,7 @@ export default function SaveList({ id }) {
           return (
             <div key={index} className="save-element">
               <div className="save-image">
-                <Image alt="save image" />
+                <Image src="" alt="save image" />
               </div>
               <div className="save-description"></div>
             </div>

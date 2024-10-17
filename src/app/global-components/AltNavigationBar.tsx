@@ -1,9 +1,8 @@
 import { useRef, useState, useEffect } from "react";
 import { TfiMenu } from "react-icons/tfi";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 export default function AltNavigationBar({ check }) {
-  const altNav = useRef();
+  const altNav = useRef<HTMLTableSectionElement>();
   const [navOption, setNavOption] = useState({
     style: null,
     mount: false,
@@ -28,7 +27,6 @@ export default function AltNavigationBar({ check }) {
     <>
       <TfiMenu
         onClick={() => {
-          console.log(navOption);
           if (navOption.mount) setNavOption({ style: "fade out", mount: true });
           else setNavOption({ style: null, mount: true });
         }}

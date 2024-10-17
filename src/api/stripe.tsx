@@ -1,13 +1,15 @@
 "use client";
 // import Stripe from "stripe";
 import Cookies from "js-cookie";
-import { Stripe } from "@stripe/stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { useState, useEffect } from "react";
-import getUserInfo from "./checkLogin";
 import { BACKEND } from "@/constant/AppConstant";
+import Stripe from "stripe";
 
-const pay = async (productId) => {
+interface GetCheckoutSessionResponse {
+  session: Stripe.Checkout.Session;
+}
+
+const pay = async (productId: string) => {
   //---Get productId-----//
   const stripe = await loadStripe(
     "pk_test_51NCAQOFQZuy2dcaHp0V18YhchNNqFoPMblQnZpTw0XcvNcFcVKiqH1ADAOE5RABjz0OuocvkANwdujt3Ht0DpMrI00YdVH8ERC"
@@ -23,10 +25,10 @@ const pay = async (productId) => {
       cache: "no-store",
     });
 
-    res = await res.json();
+    const checkoutRes = (await res.json()) as GetCheckoutSessionResponse;
     //--REDIRECT TO CHECKOUT--//
     await stripe.redirectToCheckout({
-      sessionId: res.session.id,
+      sessionId: checkoutRes.session.id,
     });
   } catch (err) {
     alert(err);

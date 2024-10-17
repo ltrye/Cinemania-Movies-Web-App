@@ -1,16 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useContext, useEffect, useRef, useState } from "react";
-import { AiOutlineSearch, AiFillCaretDown } from "react-icons/ai";
+import { AiFillCaretDown } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
-import { TfiMenu } from "react-icons/tfi";
 import AltNavigationBar from "./AltNavigationBar";
 
 import SearchBox from "./SearchBox";
 import { UserContext } from "@/context/UserContext";
-import SkeletonLoader from "../profile/components/SkeletonLoader";
+import Image from "next/image";
 function checkRoute(path) {
   if (path === "/" || !path) return "none";
   else {
@@ -39,7 +38,7 @@ function checkRoute(path) {
 export default function NavigationBar() {
   const { user, loading } = useContext(UserContext);
 
-  const genreList = useRef();
+  const genreList = useRef<HTMLDivElement>();
   let check;
   const path = usePathname();
   check = checkRoute(path);
@@ -74,7 +73,6 @@ export default function NavigationBar() {
           </Link>
           <div
             onClick={(e) => {
-              console.log(genreList.current.classList.length);
               genreList.current.classList.length === 1
                 ? genreList.current.classList.add("genre-close")
                 : genreList.current.classList.remove("genre-close");
@@ -98,8 +96,8 @@ export default function NavigationBar() {
             <div className="animate-pulse bg-slate-200 rounded-full size-8 min-w-8"></div>
           )}
           {user && !loading && (
-            <img
-              // src={user.photoURL}
+            <Image
+              alt="profile"
               src="/demo-image.jpg"
               className={`rounded-full size-8 min-w-8`}
             />

@@ -4,7 +4,14 @@ import Link from "next/link";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useRef, useState } from "react";
 
-let pos = { x: 0, y: 0 };
+interface ScrollPosition {
+  x: number;
+  y: number;
+  left?: number;
+  right?: number;
+}
+
+let pos: ScrollPosition = { x: 0, y: 0 };
 let dragging = false;
 
 const mouseMoveHandler = function (e, slider) {
@@ -27,7 +34,6 @@ const mouseDownHandler = function (e, slider) {
     x: e.clientX,
     y: e.clientY,
   };
-  console.log(pos);
 };
 const mouseUpHandler = function (e, slider) {
   dragging = false;

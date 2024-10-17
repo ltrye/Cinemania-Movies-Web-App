@@ -7,7 +7,7 @@ function Film({ name, slug }) {
     <article className="film-el">
       <Link prefetch={false} href={`/title/${slug}`}>
         <div className="film-panel-image">
-          <Image fill src="/poster-demo.jpg" />
+          <Image alt="film" fill src="/poster-demo.jpg" />
         </div>
 
         <div>{name}</div>

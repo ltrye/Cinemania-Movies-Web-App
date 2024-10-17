@@ -3,12 +3,11 @@ import { useRef } from "react";
 import { IoMdSend } from "react-icons/io";
 import { BiCommentDetail } from "react-icons/bi";
 export default function CommentSection() {
-  const comment = useRef();
+  const comment = useRef<HTMLTableSectionElement>();
   return (
     <>
       <div
         onClick={() => {
-          console.log(comment.current);
           // if (comment.current.style.display === "block") {
           //   return (comment.current.style.display = "none");
           // }
@@ -42,7 +41,6 @@ export default function CommentSection() {
               rows={2}
               placeholder="Viet binh luan cua ban tai day..."
               className="comment-input"
-              type="text"
             ></textarea>
 
             <button className="submit-comment">
